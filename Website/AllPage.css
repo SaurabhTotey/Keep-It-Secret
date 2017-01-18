@@ -1,0 +1,62 @@
+.main{
+  background-color: #0099ff;
+  margin: auto;
+  padding: 10px;
+  width: 1080px;
+}
+
+.fit{
+  width: 100%;
+}
+
+.masthead{
+
+}
+
+.siteNav{
+  float: center;
+  width: 100%;
+}
+
+ul.nav{
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.nav li{
+  display: inline-block;
+  width: 25%;
+  border-right: 1px solid;
+}
+
+.nav li:nth-child(4){
+  border-right: 0px;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.imgContainer{
+  height: 100%;
+}
+
+.specialBlue{
+  background-color: #80ccff;
+}
+
+.linkGlyph{
+  color:black;
+}
+
+.footerBox{
+  background-color: lightgray;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.footBtn{
+  background-color: #80ccff;
+}

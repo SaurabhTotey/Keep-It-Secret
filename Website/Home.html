@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+
+    <meta charset = "utf-8">
+
+    <link rel = "icon" href="images/icon.png"/>
+    <title>Keep it Secret</title>
+
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js"></script>-->
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel = "stylesheet" href = "AllPage.css"/>
+    <script src = "ManipulateText.js"></script>
+
+  </head>
+
+  <body>
+    <div class = "main">
+
+      <div class = "masthead">
+        <a href = "Home.html"><img src="images/Masthead.png" class = "fit rounded-img" id = "bannerImg"/></a>
+      </div>
+
+      <br/>
+
+      <div class = "navbar fit navbar-light siteNav img-rounded">
+        <ul class = "nav navbar-nav fit img-rounded specialBlue">
+          <li class = "active"><a href = "Home.html" class = "linkGlyph">Home</a></li>
+          <li><a href="NewKey.html" class = "linkGlyph">Generate a Key</a></li>
+          <li><a href="Encode.html" class = "linkGlyph">Encode a Message</a></li>
+          <li><a href="Decode.html" class = "linkGlyph">Decode a Message</a></li>
+        </ul>
+      </div>
+
+      <div class = "jumbotron jumbotron-fluid img-rounded fit">
+        <div class = "container">
+          <div id = "headCarousel" class="carousel slide" data-ride="carousel">
+            <ol class = "carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+              <li data-target="#myCarousel" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              <div class = "item active">
+
+              </div>
+              <div class = "item">
+
+              </div>
+              <div class = "item">
+
+              </div>
+              <div class = "item">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class = "container fit">
+        <div class = "row vertical-align">
+          <div class = "col-sm-8 specialBlue img-rounded">
+            <h3>About</h3>
+            <p>To start using this website, all you need to do is to make a private key, but don't tell anyone what it is! It is basically your password to this website. From your private key, a public key will be generated, which you can give to anyone. Anyone who wants to write a message to you will need to encode it with your public key. When you receive the encoded message, be sure to decrypt it with your super-secret private key. This way, you can securely transmit messages. However, beware! Encryption is only as strong as the weakest link! Make sure your private key is secure! If your private key is easy to find, the entire point of encryption falls apart. The encryption is also only as strong as the machine hosting this website, and as this was mostly a test of an idea, this encryption service shouldn't be used professionally or seriously as an actual encryption site. It will work for personal communication, though.</p>
+            <h3>How It Works - <a href = "NewKey.html" class = "linkGlyph">Key Creation</a></h3>
+            <p>This website uses public key cryptography to encode and decode messages. What this means is that every person who wants to recieve messages has 2 keys: a public key, and a private key. Their private key could be anything from their dog's name to their favorite sequence of numbers. The user can choose their private key, but the strength of the encryption is only as secure as the security of their private key. After a private key is chosen, the user will be given a public key which they can give to anyone. Anyone who wants to write a message to the user now just needs to encrypt it with their public key. When the user receives the encoded message, they can decode it with the private key that they chose. Private keys do expire a week from the last time they are used, so if a private key hasn't been used for seven days, it will get deleted, and the public key won't link to anywhere. The user can also set the key to expire in a set amount of time no matter what.</p>
+            <h3>How It Works - <a href = "Encode.html" class = "linkGlyph">Encoding</a></h3>
+            <p>When a user wants to write a message to another user, they enter their message and encode it with the recipient's public key. The code on the website takes the public key, connects to a database, and then gets the private key of the recipient, and then sets that as the Random-Number-Generator's (RNG's) seed. The way an RNG works is that takes a number (called the seed), and then performs a math function on it to generate another number; the seed then gets incremented in a predictable way. Good RNGs work such that a difference in 0.00000001 in a seed could mean any difference from 0 to 99999999 in the output in order to attempt to mask the seed or input. An RNG given the same seed will, however, always generate the same numbers. The script, after receiving the recipient's private key given their public key, will start incrementing (or decrementing) the letters by random amounts: the random amounts that are used to increment the message are generated from the RNG, and an example of increasing a letter would be similar to changing the letter "A" to the letter "D" by incrementing it by 3, or going 3 spaces up the alphabet. After being incremented, a random side length for a rectangle is chosen. Each unit of the rectangle has the next letter of the message (that has been incremented at this point) assigned to it. After the side has been filled, the next row is again filled with the chosen side length amount of letters. This process is repeated until all letters of the message have been assigned to a spot in the rectangle. Because they were assigned horizontally, the columns are taken (vertically) and then combined to be the new encoded message. The message then gets anagrammed with extra letters in the mix so no one can tell which letters were part of the message and which letters weren't. The message then gets packaged off with the original message length mixed in as letters, and it is then given and ready for delivery.</p>
+            <h3>How It Works - <a href = "Decode.html" class = "linkGlyph">Decoding</a></h3>
+            <p>The first step to decoding the message is figuring out what private key was used to encode the message. The recipient enter's their private key, and it is set as the RNG seed. Next, the original message length is discerned from the encoded message, as the message length is always predictably encoded the same way into any message. After the length of the original message is found out, the RNG generates a random number for each letter in the original message: these random numbers were how much each letter in the original message was incremented. Then, another random number is generated from the already-seeded-RNG, and this new random number is the rectangle length (n) for taking letters at every nth spot. After that, the RNG figures out the numbers it used to angaram the message, and stores that as well. The last step the RNG does is that it generates a certain amount of random letters and positions: these letters and positions all correspond to the random letters that were originally inserted into the message. Each of those letters get taken out, and all that is left is a shifted and anagrammed version of the original message. The message gets de-anagrammed, and then is re-inputted into the rectangle vertically. The horizontal message, once taken out, is one step away from the original message. The first numbers that were generated that correspond to the shifting of each letter are then used to de-shift each letter back to the original message. This is then packaged off and displayed to the recipient.</p>
+          </div>
+          <div class = "col-sm-4 imgContainer">
+
+          </div>
+        </div>
+      </div>
+
+      <br/>
+
+      <div class = "container fit footerBox img-rounded">
+        <div class = "row">
+          <div class = "col-sm-3">
+            <a role = "button" href = "mailto:SaurabhTotey@gmail.com" class = "btn btn-block footBtn">
+              <h5>Creator Email</h5>
+              <p>SaurabhTotey@gmail.com</p>
+            </a>
+          </div>
+          <div class = "col-sm-3">
+            <a role = "button" href = "https://github.com/SaurabhTotey" class = "btn btn-block footBtn">
+              <h5>Creator Github</h5>
+              <p>SaurabhTotey</p>
+            </a>
+          </div>
+          <div class = "col-sm-3">
+            <a role = "button" href = "https://www.SaurabhTotey.com" class = "btn btn-block footBtn">
+              <h5>Creator Portfolio</h5>
+              <p>SaurabhTotey.com</p>
+            </a>
+          </div>
+          <div class = "col-sm-3">
+            <a role = "button" href = "#" class = "btn btn-block footBtn">
+              <h5>Donate to Creator</h5>
+              <p>Every penny helps!</p>
+            </a>
+          </div>
+        </div>
+        <br/>
+        <div class = "row col-sm-12">
+          <p>Page designed by Saurabh Totey. Images created by Elia Gorokhovsky. Code written by Saurabh Totey. Made in November, 2016. Inspired by our original "<a href = "http://www.codeskulptor.org/#user40_fVbe7V0msMMBR45.py">Code Talker Script</a>" and also inspired by the <a href = "http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html">"Stick Figure Guide to the Advanced Encryption Standard (AES)" by Moserware</a>.</p>
+        </div>
+      </div>
+
+    </div>
+  </body>
+
+</html>
