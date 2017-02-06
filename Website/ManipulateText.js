@@ -1,18 +1,20 @@
-document.getElementById("siteNav").data-offset-top = document.getElementById("bannerImg").height + "";
+$(document).ready(function(){
 
-function randLetter(){
-  var chars = "abcdefghijklmnopqrstuvwxyz1234567890,./<>?;':'[]{}-=_+\"\\|";
-  return chars[Math.floor((Math.random() * (chars.length + 1))) - 1];
-}
+  function randLetter(){
+    var chars = "abcdefghijklmnopqrstuvwxyz1234567890,./<>?;':'[]{}-=_+\"\\|";
+    return chars[Math.floor((Math.random() * (chars.length + 1))) - 1];
+  }
 
-function randBetween(lowerLimit, upperLimit){
+  function randBetween(lowerLimit, upperLimit){
 
-}
+  }
 
-function encodeMessage(message){
+  function encodeMessage(message, public_key){
 
-}
+  }
 
-function decodeMessage(message){
+  function decodeMessage(message, private_key){
 
-}
+  }
+
+});
