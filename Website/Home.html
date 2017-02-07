@@ -37,7 +37,11 @@
         </ul>
       </div>
 
-      <script>document.getElementById("siteNav").data-offset-top = document.getElementById("bannerImg").height + "";</script>
+      <script>
+        $(document).ready(function(){
+          document.getElementById("siteNav").data-offset-top = document.getElementById("bannerImg").height + "";
+        });
+      </script>
 
       <div class = "jumbotron jumbotron-fluid img-rounded fit">
         <div class = "container">
