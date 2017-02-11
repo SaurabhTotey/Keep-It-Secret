@@ -10,7 +10,6 @@
 
     <!--<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js"></script>-->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src = "http://ajax.microsoft.com/ajax/beta/0911/MicrosoftAjax.js"></script>
     <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -39,7 +38,7 @@
 
       <script>
         $(document).ready(function(){
-          document.getElementById("siteNav").data-offset-top = document.getElementById("bannerImg").height + "";
+          document.getElementsByClassName("siteNav")[0].style.marginTop = document.getElementById("bannerImg").height + "px";
         });
       </script>
 

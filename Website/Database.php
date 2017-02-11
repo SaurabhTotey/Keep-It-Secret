@@ -5,8 +5,8 @@
 
     public function connect(){
       if(!isset(self::$connection)){
-        $config = parse_ini_file('./config.ini');
-        self::$connection = new mysqli('localhost',$config['username'],$config['password'],$config['dbname']);
+        $config = parse_ini_file('../config.ini');
+        self::$connection = new mysqli($config['connectionURL'], $config['username'], $config['password'], $config['databaseName']);
       }elseif(self::$connection === false){
         //TODO
         return false;
@@ -41,5 +41,13 @@
       return "'" . $connection -> real_escape_string($value) . "'";
     }
 
+  }
+
+  $database = new Database();
+  $database -> connect();
+
+  if(isset($_POST["publicKey"]) && isset($_POST["privateKey"])){
+    $keys = array($_POST["publicKey"], $_POST["privateKey"]);
+    $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($keys[0]) . ", " . $database -> quote($keys[1]) . ", FALSE);");
   }
 ?>
