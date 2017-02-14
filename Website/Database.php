@@ -43,11 +43,4 @@
 
   }
 
-  $database = new Database();
-  $database -> connect();
-
-  if(isset($_POST["publicKey"]) && isset($_POST["privateKey"])){
-    $keys = array($_POST["publicKey"], $_POST["privateKey"]);
-    $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($keys[0]) . ", " . $database -> quote($keys[1]) . ", FALSE);");
-  }
 ?>

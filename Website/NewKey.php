@@ -15,9 +15,23 @@
     <link rel = "stylesheet" href = "AllPage.css"/>
     <script src = "ManipulateText.js"></script>
 
-    <?php
-      include "Database.php";
-    ?>
+    <script>
+      $(document).ready(function(){<?php
+        include "Database.php";
+
+        $database = new Database();
+        $database -> connect();
+
+        if(isset($_POST["publicKey"]) && isset($_POST["privateKey"])){
+          $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote($_POST["privateKey"]) . ", 0);");
+          if($result){
+            echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Your keys have been generated!\";";
+          }else{
+            echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href= '#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Cannot connect to database or address was already taken.\";";
+          }
+        }
+      ?>});
+    </script>
 
   </head>
 
@@ -73,7 +87,7 @@
               <h4 class="modal-title">Generate Keys</h4>
             </div>
             <div class = "modal-body">
-              <form onSubmit = "generateKeys(this); return false;">
+              <form method = "post" action = "NewKey.php">
                 <p class = "fit">Public Key (Address): <br/> <input type = "text" name = "publicKey" value = "" class = "fit"></p>
                 <p class = "fit">Private Key (Password): <br/> <input type = "password" name = "privateKey" value = "" class = "fit"></p>
                 <input type = "submit" class = "fit submit">
@@ -87,6 +101,9 @@
       </div>
 
       <br/>
+
+      <div id = "keyAlert" class = "fit alert alert-dismissable">
+      </div>
 
       <div class = "container fit footerBox img-rounded">
         <div class = "row">

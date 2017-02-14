@@ -1,15 +1,3 @@
-function generateKeys(form){
-  $("#myModal").modal('hide');
-  var keys = {publicKey : form.publicKey.value, privateKey : form.privateKey.value}
-  console.log("\"" + keys.publicKey + "\"" + " is the public key");
-  console.log("\"" + keys.privateKey + "\"" + " is the private key");
-  if(!(publicKey != "" || privateKey != "")){
-    $.post("Database.php", keys, function(){
-
-    });
-  }
-}
-
 function randBetween(lowerLimit, upperLimit){
 
 }
