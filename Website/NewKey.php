@@ -29,6 +29,7 @@
           }else{
             echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href= '#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Cannot connect to database or address was already taken.\";";
           }
+          $_POST = array();
         }
       ?>});
     </script>
