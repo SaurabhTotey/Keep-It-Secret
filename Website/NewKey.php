@@ -13,7 +13,6 @@
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel = "stylesheet" href = "AllPage.css"/>
-    <script src = "ManipulateText.js"></script>
 
     <script>
       $(document).ready(function(){<?php
@@ -22,7 +21,7 @@
         $database = new Database();
         $database -> connect();
 
-        if(isset($_POST["publicKey"]) && isset($_POST["privateKey"])){
+        if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"])){
           $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote($_POST["privateKey"]) . ", 0);");
           if($result){
             echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Your keys have been generated!\";";
