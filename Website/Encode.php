@@ -8,7 +8,6 @@
     <link rel = "icon" href="images/icon.png"/>
     <title>Keep it Secret</title>
 
-    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js"></script>-->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -18,6 +17,7 @@
     <script>
       $(document).ready(function(){
         var toReturn;
+
         <?php
           include "Database.php";
           include "ManipulateText.php";
@@ -26,18 +26,30 @@
           $database -> connect();
 
           if(!empty($_POST["recipientPublic"]) && !empty($_POST["messageToEncode"])){
+
             $privateKey = $database -> select("SELECT privateKey FROM userKeys WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]) . ";")[0]["privateKey"];
+            $updatedTime = $database -> query("INSERT INTO userKeys (lastUsed) VALUES (NOW())");
+
             if($privateKey === false){
-              //TODO handle error
+              echo "toReturn = false;";
             }else{
-              echo "toReturn = \"" . encodeMessage($_POST["recipientPublic"], $privateKey) . "\";";
+              echo "toReturn = \"" . encodeMessage($_POST["messageToEncode"], $privateKey) . "\";";
             }
+
             $_POST = array();
           }
         ?>
+
         if(toReturn !== undefined && toReturn !== null){
-          console.log(toReturn);
-          //TODO send up modal with toReturn displayed
+          if(toReturn = false){
+            console.log("Could not find public key");
+            //TODO send up modal with error message
+          }else{
+            console.log("Successfully found public/private key pair and encoded message");
+            //TODO send up modal with toReturn displayed
+          }
+        }else{
+          console.log("User didn't enter either the recipient's public key or the message they wanted to encode.");
         }
       });
     </script>

@@ -22,12 +22,14 @@
         $database -> connect();
 
         if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"])){
+
           $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote($_POST["privateKey"]) . ", 0);");
           if($result){
             echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Your keys have been generated!\";";
           }else{
             echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href= '#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Cannot connect to database or address was already taken. Try checking your connection or changing your address.\";";
           }
+
           $_POST = array();
         }
       ?>});
@@ -90,6 +92,7 @@
               <form method = "post" action = "NewKey.php">
                 <p class = "fit">Public Key (Address): <br/> <input type = "text" name = "publicKey" value = "" class = "fit"></p>
                 <p class = "fit">Private Key (Password): <br/> <input type = "password" name = "privateKey" value = "" class = "fit"></p>
+                <!--TODO get a checkbox for a forceExpire option-->
                 <input type = "submit" class = "fit submit">
               </form>
             </div>
