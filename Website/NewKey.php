@@ -17,19 +17,21 @@
     <script>
       $(document).ready(function(){<?php
         include "Database.php";
-
+        //Constructs a database object
         $database = new Database();
         $database -> connect();
-
+        //Checks if the page form had been filled and submitted
         if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"])){
-
+          //Attempts to insert user's keys into the database
+          //TODO hash private key?
           $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote($_POST["privateKey"]) . ", 0);");
+          //Sends out a notification saying whether the key insertion had been successful
           if($result){
             echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Your keys have been generated!\";";
           }else{
             echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href= '#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Cannot connect to database or address was already taken. Try checking your connection or changing your address.\";";
           }
-
+          //Clears entered information so that future reloads don't try and re-insert keys and send an error notification
           $_POST = array();
         }
       ?>});

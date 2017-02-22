@@ -21,35 +21,37 @@
         <?php
           include "Database.php";
           include "ManipulateText.php";
-
+          //Creates a database object
           $database = new Database();
           $database -> connect();
-
+          //Checks if the page form had been filled and submitted
           if(!empty($_POST["recipientPublic"]) && !empty($_POST["messageToEncode"])){
-
+            //Attempts to retrieve recipient's private key from their public key
+            //The specified row's "lastUsed" column is then updated with a more recent time
             $privateKey = $database -> select("SELECT privateKey FROM userKeys WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]) . ";")[0]["privateKey"];
-            $updatedTime = $database -> query("INSERT INTO userKeys (lastUsed) VALUES (NOW())");
-
+            $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]));
+            //Sets the "toReturn" variable to the encoded message unless the main query fails
             if($privateKey === false){
               echo "toReturn = false;";
             }else{
               echo "toReturn = \"" . encodeMessage($_POST["messageToEncode"], $privateKey) . "\";";
             }
-
+            //Clears entered data so that reloads don't unecessarily trigger modals
             $_POST = array();
           }
         ?>
-
+        
+        //Checks to see if the PHP sent the encoded message
         if(toReturn !== undefined && toReturn !== null){
+          //Checks to see if the PHP query amounted to nothing in the case that the query was attempted
           if(toReturn = false){
             console.log("Could not find public key");
             //TODO send up modal with error message
           }else{
+            //Displays the encoded message
             console.log("Successfully found public/private key pair and encoded message");
             //TODO send up modal with toReturn displayed
           }
-        }else{
-          console.log("User didn't enter either the recipient's public key or the message they wanted to encode.");
         }
       });
     </script>
