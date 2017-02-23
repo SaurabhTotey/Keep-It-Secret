@@ -30,7 +30,7 @@
    */
   function numberToLetter($toLetterize){
     global $allChars;
-    return substr($allChars, $toLetterize % strlen($allChars), 1);
+    return substr($allChars, $toLetterize % strlen($allChars) - 1, 1);
   }
 
   /*
@@ -38,6 +38,8 @@
    */
   function encodeMessage($message, $private_key){
     global $allChars;
+    //TODO strip all trailing whitespace
+    /*strip strip strip*/
     //Seeds the RNG with the user's password (as a number) and records original message length
     //Mess length is needed for decryption
     mt_srand(stringToNumber($private_key));
@@ -112,6 +114,10 @@
     }
     $messageLength = intval(substr($temp, 1));
     $message = substr($message, 0, -strlen($temp));
+    //This part makes the "decoded" variable the right length
+    for($i = 0; $i < $messageLength; $i++){
+      $decoded .= " ";
+    }
     //This part generates the same shifts that were generated at this step of the encryption
     //These shifts will be used at a later stage to unshift all letters
     $shifts = array();
@@ -144,13 +150,30 @@
       randLetter();
       $tempLength++;
     }
-
-    //TODO use obtained indices of legit jumped and shifted letters to reconstruct the message at this step
-
-    //TODO unjump the message
-
-    //TODO unshift the message
-
+    //This part uses obtained indices of legit jumped and shifted letters to reconstruct the jumped and shifted message (but not anagrammed and filled anymore)
+    $tempDecoded = $decoded;
+    for($i = 0; $i < $messageLength; $i++){
+      $tempDecoded = substr_replace($tempDecoded, substr($message, $legitLocations[$i], 1), $orderUsed[$i], 1);
+    }
+    //This part "un-jumps" the message
+    //The first step is looking at the square size and getting a representative array of where the characters would go
+    //The second step looks at the representative array and puts the characters where they were before getting assigned to where they would go
+    $jumped = array();
+    for($i = 0; $i < $jumpLength; $i++){
+      for($j = 0; $j < ceil($messageLength / $jumpLength); $j++){
+        if($i + $j * $jumpLength < $messageLength){
+          $jumped[] = $i + $j * $jumpLength;
+        }else{
+          $jumped[] = sizeof($jumped);
+        }
+      }
+    }
+    for($i = 0; $i < sizeof($jumped); $i++){
+      $decoded = substr_replace($decoded, substr($tempDecoded, $i, 1), $jumped[$i], 1);
+    }
+    for($i = 0; $i < $messageLength; $i++){
+      $decoded = substr_replace($decoded, numberToLetter(stringToNumber(substr($message, $i, 1)) - $shifts[$i]), $i, 1);
+    }
     return $decoded;
   }
  ?>

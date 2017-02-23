@@ -24,7 +24,7 @@
         if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"])){
           //Attempts to insert user's keys into the database
           //TODO hash private key?
-          $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote($_POST["privateKey"]) . ", 0);");
+          $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote(password_hash($_POST["privateKey"], PASSWORD_BCRYPT)) . ", 0);");
           //Sends out a notification saying whether the key insertion had been successful
           if($result){
             echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Your keys have been generated!\";";
@@ -43,15 +43,15 @@
     <div class = "main">
 
       <div class = "masthead">
-        <a href = "Home.html"><img src="images/Masthead.png" class = "fit rounded-img" id = "bannerImg"/></a>
+        <a href = "index.html"><img src="images/Masthead.png" class = "fit rounded-img" id = "bannerImg"/></a>
       </div>
 
       <br/>
 
       <div class = "navbar fit navbar-light siteNav img-rounded">
         <ul class = "nav navbar-nav fit img-rounded specialBlue">
-          <li class = "active"><a href = "Home.html" class = "linkGlyph">Home</a></li>
-          <li><a href="NewKey.php" class = "linkGlyph">Generate a Key</a></li>
+          <li><a href = "index.html" class = "linkGlyph">Home</a></li>
+          <li class = "active"><a href="NewKey.php" class = "linkGlyph">Generate a Key</a></li>
           <li><a href="Encode.php" class = "linkGlyph">Encode a Message</a></li>
           <li><a href="Decode.php" class = "linkGlyph">Decode a Message</a></li>
         </ul>
