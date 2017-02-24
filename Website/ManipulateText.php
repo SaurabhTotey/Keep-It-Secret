@@ -1,6 +1,6 @@
 <?php
 
-  $allChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,./<>?;\':[]{}-=_+"\\|!@#$%^&*()';
+  $allChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,./<>?;\':[]{}-=_+"\\|!@#$%^&*() ';
 
   /*
    *  This function returns a random letter from the above string of all characters
@@ -38,64 +38,37 @@
    */
   function encodeMessage($message, $private_key){
     global $allChars;
-    //TODO strip all trailing whitespace
-    /*strip strip strip*/
     //Seeds the RNG with the user's password (as a number) and records original message length
     //Mess length is needed for decryption
     mt_srand(stringToNumber($private_key));
-    $toReturn = "";
+    $encoded = "";
     $messageLength = strlen($message);
     //This loop goes through each letter of the message and then shifts it up a certain amount of characters using the numberToLetter method
     //It takes the letter's number (with stringToNumber) and then adds a random amount on to that number and then reconverts the number to a letter
     for($i = 0; $i < $messageLength; $i++){
       $message = substr_replace($message, numberToLetter(stringToNumber(substr($message, $i, 1)) + mt_rand(0, strlen($allChars))), $i, 1);
     }
-    //Shifts the message into a square of a random side length as exemplified below
-    //"this is a message" in a 5x4 square (not a square, but usually will be a square)
-    // - - - - - -
-    // |t|h|i|s| |
-    // - - - - - -
-    // |i|s| |a| |
-    // - - - - - -
-    // |m|e|s|s|a|
-    // - - - - - -
-    // |g|e|!| | |
-    // - - - - - -
-    //turns to "timghseei s!sas   a "
-    $jumpLength = mt_rand(1, $messageLength / 2);
-    $jumped = "";
-    for($i = 0; $i < $jumpLength; $i++){
-      for($j = 0; $j < ceil($messageLength / $jumpLength); $j++){
-        if($i + $j * $jumpLength < $messageLength){
-          $jumped .= substr($message, $i + $j * $jumpLength, 1);
-        }else{
-          $jumped .= " ";
-        }
-      }
-    }
     //This part "fills" and anagrams the message from its current stage
     //"filling" is inserting random letters in between all "legit" letters
     //anagramming happens when random "legit" letters are inserted in no particular order
     $alreadyUsed = array();
     $randSpot = -1;
-    $encoded = "";
-    while(sizeof($alreadyUsed) < strlen($jumped)){
+    while(sizeof($alreadyUsed) < $messageLength){
       while(mt_rand(0, 1) == 1){
         $encoded .= randLetter();
       }
       while($randSpot < 0 || in_array($randSpot, $alreadyUsed)){
-        $randSpot = mt_rand(0, strlen($jumped) - 1);
+        $randSpot = mt_rand(0, $messageLength - 1);
       }
       $alreadyUsed[] = $randSpot;
-      $encoded .= substr($jumped, $randSpot, 1);
+      $encoded .= substr($message, $randSpot, 1);
     }
     while(mt_rand(0, 1) == 1){
       $encoded .= randLetter();
     }
     //This part adds the encoded message and concatenates it with a ";" and the original message length
     //The original message length is necessary for decryption because it was used for loop counters and such in encryption
-    $toReturn = $encoded . ";" . $messageLength;
-    return $toReturn;
+    return $encoded . ";" . $messageLength;
   }
 
   /*
@@ -124,9 +97,6 @@
     for($i = 0; $i < $messageLength; $i++){
       $shifts[] = mt_rand(0, strlen($allChars));
     }
-    //This part generates the same square length for "jumping" the message
-    //The RNG will make the same jump length here as it did for encryption if the password was the same
-    $jumpLength = mt_rand(1, $messageLength / 2);
     //This part mimics the encoding process of filling and anagramming a message with a few key differences
     //It does the same process for filling with generating the same random letters (because of the same RNG seed)
     //But for anagramming, it just records the location of the letter it would have taken and the location of where the letter was put
@@ -140,7 +110,7 @@
         $tempLength++;
       }
       while($randSpot < 0 || in_array($randSpot, $orderUsed)){
-        $randSpot = mt_rand(0, strlen($messageLength) - 1);
+        $randSpot = mt_rand(0, $messageLength - 1);
       }
       $orderUsed[] = $randSpot;
       $legitLocations[] = $tempLength;
@@ -151,28 +121,12 @@
       $tempLength++;
     }
     //This part uses obtained indices of legit jumped and shifted letters to reconstruct the jumped and shifted message (but not anagrammed and filled anymore)
-    $tempDecoded = $decoded;
     for($i = 0; $i < $messageLength; $i++){
-      $tempDecoded = substr_replace($tempDecoded, substr($message, $legitLocations[$i], 1), $orderUsed[$i], 1);
+      $decoded = substr_replace($decoded, substr($message, $legitLocations[$i], 1), $orderUsed[$i], 1);
     }
-    //This part "un-jumps" the message
-    //The first step is looking at the square size and getting a representative array of where the characters would go
-    //The second step looks at the representative array and puts the characters where they were before getting assigned to where they would go
-    $jumped = array();
-    for($i = 0; $i < $jumpLength; $i++){
-      for($j = 0; $j < ceil($messageLength / $jumpLength); $j++){
-        if($i + $j * $jumpLength < $messageLength){
-          $jumped[] = $i + $j * $jumpLength;
-        }else{
-          $jumped[] = sizeof($jumped);
-        }
-      }
-    }
-    for($i = 0; $i < sizeof($jumped); $i++){
-      $decoded = substr_replace($decoded, substr($tempDecoded, $i, 1), $jumped[$i], 1);
-    }
+    //This part unshifts the message using the pregenerated shift values
     for($i = 0; $i < $messageLength; $i++){
-      $decoded = substr_replace($decoded, numberToLetter(stringToNumber(substr($message, $i, 1)) - $shifts[$i]), $i, 1);
+      $decoded = substr_replace($decoded, numberToLetter(stringToNumber(substr($decoded, $i, 1)) - $shifts[$i]), $i, 1);
     }
     return $decoded;
   }
