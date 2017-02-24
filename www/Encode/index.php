@@ -19,8 +19,8 @@
         var toReturn;
 
         <?php
-          include "Database.php";
-          include "ManipulateText.php";
+          include "../../scripts/Database.php";
+          include "../../scripts/ManipulateText.php";
           //Creates a database object
           $database = new Database();
           $database -> connect();
@@ -62,17 +62,17 @@
     <div class = "main">
 
       <div class = "masthead">
-        <a href = "index.html"><img src="images/Masthead.png" class = "fit rounded-img" id = "bannerImg"/></a>
+        <a href = "../index.html"><img src="images/Masthead.png" class = "fit rounded-img" id = "bannerImg"/></a>
       </div>
 
       <br/>
 
       <div class = "navbar fit navbar-light siteNav img-rounded">
         <ul class = "nav navbar-nav fit img-rounded specialBlue">
-          <li><a href = "index.html" class = "linkGlyph">Home</a></li>
-          <li><a href="NewKey.php" class = "linkGlyph">Generate a Key</a></li>
-          <li class = "active"><a href="Encode.php" class = "linkGlyph">Encode a Message</a></li>
-          <li><a href="Decode.php" class = "linkGlyph">Decode a Message</a></li>
+          <li><a href = "../index.html" class = "linkGlyph">Home</a></li>
+          <li><a href = "../GenerateKey/index.php" class = "linkGlyph">Generate a Key</a></li>
+          <li class = "active"><a href="index.php" class = "linkGlyph">Encode a Message</a></li>
+          <li><a href = "../Decode/index.php" class = "linkGlyph">Decode a Message</a></li>
         </ul>
       </div>
 
@@ -122,14 +122,14 @@
           </div>
           <div class = "col-sm-3">
             <a role = "button" href = "https://github.com/SaurabhTotey" class = "btn btn-block footBtn">
-              <h5>Creator Github</h5>
+              <h5>Creator GitHub</h5>
               <p>SaurabhTotey</p>
             </a>
           </div>
           <div class = "col-sm-3">
-            <a role = "button" href = "#" class = "btn btn-block footBtn">
+            <a role = "button" href = "https://saurabhtotey.github.io/" class = "btn btn-block footBtn">
               <h5>Creator Portfolio</h5>
-              <p>Ideally would be SaurabhTotey.com</p>
+              <p>saurabhtotey.github.io</p>
             </a>
           </div>
           <div class = "col-sm-3">
