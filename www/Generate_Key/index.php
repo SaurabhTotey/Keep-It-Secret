@@ -23,8 +23,8 @@
         //Checks if the page form had been filled and submitted
         if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"])){
           //Attempts to insert user's keys into the database
-          //TODO hash private key?
-          $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote(password_hash($_POST["privateKey"], PASSWORD_BCRYPT)) . ", 0);");
+          $forceExpire = isset($_POST["forcedExpiration"])? 1 : 0;
+          $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote(password_hash($_POST["privateKey"], PASSWORD_BCRYPT)) . "," . $forceExpire . ");");
           //Sends out a notification saying whether the key insertion had been successful
           if($result){
             echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Your keys have been generated!\";";
@@ -85,30 +85,32 @@
 
       <div id = "myModal" class = "modal fade" role = "dialog">
         <div class = "modal-dialog">
-          <div class = "modal-content">
+          <div class = "modal-content img-rounded">
+
             <div class = "modal-header specialBlue">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">Generate Keys</h4>
             </div>
             <div class = "modal-body">
-              <form method = "post" action = "NewKey.php">
+              <form method = "post" action = "index.php">
                 <p class = "fit">Public Key (Address): <br/> <input type = "text" name = "publicKey" value = "" class = "fit"></p>
                 <p class = "fit">Private Key (Password): <br/> <input type = "password" name = "privateKey" value = "" class = "fit"></p>
-                <!--TODO get a checkbox for a forceExpire option-->
+                <p class = "fit">Force Expire? <br/> <input type = "checkbox" name = "forcedExpiration"></p>
                 <input type = "submit" class = "fit submit">
               </form>
             </div>
             <div class = "modal-footer specialBlue">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
+            
           </div>
         </div>
       </div>
 
-      <br/>
-
       <div id = "keyAlert" class = "fit alert alert-dismissable">
       </div>
+
+      <br/>
 
       <div class = "container fit footerBox img-rounded">
         <div class = "row">

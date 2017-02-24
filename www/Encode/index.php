@@ -34,7 +34,14 @@
             if($privateKey === false){
               echo "toReturn = false;";
             }else{
-              echo "toReturn = \"" . encodeMessage($_POST["messageToEncode"], $privateKey) . "\";";
+              //Attempts to encrypt message
+              $encrypted = "";
+              try{
+                $encrypted = encodeMessage($_POST["messageToEncode"], $privateKey);
+              }catch(Exception $e){
+                $encrypted = $e -> getMessage();
+              }
+              echo "toReturn = \"" . $encrypted . "\";";
             }
             //Clears entered data so that reloads don't unecessarily trigger modals
             $_POST = array();
@@ -45,13 +52,17 @@
         if(toReturn !== undefined && toReturn !== null){
           //Checks to see if the PHP query amounted to nothing in the case that the query was attempted
           if(toReturn = false){
+            //Sends error message
+            document.getElementById("status").innerHTML = "There was an error processing your request";
+            document.getElementById("encrypted").innerHTML = toReturn;
             console.log("Could not find public key");
-            //TODO send up modal with error message
           }else{
             //Displays the encoded message
+            document.getElementById("status").innerHTML = "Your message has been encoded successfully";
+            document.getElementById("encrypted").innerHTML = toReturn;
             console.log("Successfully found public/private key pair and encoded message");
-            //TODO send up modal with toReturn displayed
           }
+          $("#myModal").modal("show");
         }
       });
     </script>
@@ -106,6 +117,26 @@
               <input class = "fit" type = "submit">
             </form>
             <br/>
+          </div>
+        </div>
+      </div>
+
+      <div id = "myModal" class = "modal fade" role = "dialog">
+        <div class = "modal-dialog">
+          <div class = "modal-content img-rounded">
+
+            <div class = "modal-header specialBlue">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Encoded Message</h4>
+            </div>
+            <div class = "modal-body">
+              <h3 id = "status"></h3>
+              <p id = "encrypted"></p>
+            </div>
+            <div class = "modal-footer specialBlue">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
           </div>
         </div>
       </div>
