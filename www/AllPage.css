@@ -51,6 +51,11 @@ ul.nav{
   background-color: #80ccff;
 }
 
+.resultText{
+  background-color: white;
+  padding: 5px;
+}
+
 .linkGlyph{
   color:black;
 }

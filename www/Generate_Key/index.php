@@ -50,10 +50,10 @@
 
       <div class = "navbar fit navbar-light siteNav img-rounded">
         <ul class = "nav navbar-nav fit img-rounded specialBlue">
-          <li><a href = "../index.html" class = "linkGlyph">Home</a></li>
-          <li class = "active"><a href="index.php" class = "linkGlyph">Generate a Key</a></li>
-          <li><a href = "../Encode/index.php" class = "linkGlyph">Encode a Message</a></li>
-          <li><a href = "../Decode/index.php" class = "linkGlyph">Decode a Message</a></li>
+          <li><a href = ".." class = "linkGlyph">Home</a></li>
+          <li class = "active"><a href="../Generate_Key" class = "linkGlyph">Generate a Key</a></li>
+          <li><a href = "../Encode" class = "linkGlyph">Encode a Message</a></li>
+          <li><a href = "../Decode" class = "linkGlyph">Decode a Message</a></li>
         </ul>
       </div>
 
@@ -93,7 +93,7 @@
               <h3 class="modal-title">Generate Keys</h3>
             </div>
             <div class = "modal-body">
-              <form method = "post" action = "index.php">
+              <form method = "post" action = "<?php echo $_SERVER['PHP_SELF']; ?>">
                 <p class = "fit">Public Key (Address): <br/> <input type = "text" name = "publicKey" value = "" class = "fit"></p>
                 <p class = "fit">Private Key (Password): <br/> <input type = "password" name = "privateKey" value = "" class = "fit"></p>
                 <p class = "fit">Force Expire? <input type = "checkbox" name = "forcedExpiration"></p>

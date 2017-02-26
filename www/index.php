@@ -27,10 +27,10 @@
 
       <div class = "navbar fit navbar-light siteNav img-rounded">
         <ul class = "nav navbar-nav fit img-rounded specialBlue">
-          <li class = "active"><a href = "index.html" class = "linkGlyph">Home</a></li>
-          <li><a href = "Generate_Key/index.php" class = "linkGlyph">Generate a Key</a></li>
-          <li><a href = "Encode/index.php" class = "linkGlyph">Encode a Message</a></li>
-          <li><a href = "Decode/index.php" class = "linkGlyph">Decode a Message</a></li>
+          <li class = "active"><a href = "../www" class = "linkGlyph">Home</a></li>
+          <li><a href = "Generate_Key" class = "linkGlyph">Generate a Key</a></li>
+          <li><a href = "Encode" class = "linkGlyph">Encode a Message</a></li>
+          <li><a href = "Decode" class = "linkGlyph">Decode a Message</a></li>
         </ul>
       </div>
 

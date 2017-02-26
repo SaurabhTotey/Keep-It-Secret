@@ -80,10 +80,10 @@
 
       <div class = "navbar fit navbar-light siteNav img-rounded">
         <ul class = "nav navbar-nav fit img-rounded specialBlue">
-          <li><a href = "../index.html" class = "linkGlyph">Home</a></li>
-          <li><a href = "../Generate_Key/index.php" class = "linkGlyph">Generate a Key</a></li>
-          <li class = "active"><a href="index.php" class = "linkGlyph">Encode a Message</a></li>
-          <li><a href = "../Decode/index.php" class = "linkGlyph">Decode a Message</a></li>
+          <li><a href = ".." class = "linkGlyph">Home</a></li>
+          <li><a href = "../Generate_Key" class = "linkGlyph">Generate a Key</a></li>
+          <li class = "active"><a href="../Encode" class = "linkGlyph">Encode a Message</a></li>
+          <li><a href = "../Decode" class = "linkGlyph">Decode a Message</a></li>
         </ul>
       </div>
 
@@ -107,7 +107,7 @@
         <div class = "row vertical-align">
           <div class = "col-sm-12 specialBlue img-rounded">
             <br/>
-            <form method = "post" action = "index.php">
+            <form method = "post" action = "<?php echo $_SERVER['PHP_SELF']; ?>">
               <p>Message to encode:</p>
               <textarea class = "fit" rows = "15" name = "messageToEncode"></textarea>
               <br/><br/>
@@ -129,9 +129,9 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h3 class="modal-title">Encoded Message</h3>
             </div>
-            <div class = "modal-body">
+            <div class = "modal-body specialBlue">
               <h3 id = "status"></h3>
-              <p id = "encrypted" class = "specialBlue fit img-rounded"></p>
+              <p id = "encrypted" class = "fit img-rounded resultText"></p>
             </div>
             <div class = "modal-footer specialBlue">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
