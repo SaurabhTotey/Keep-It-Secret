@@ -27,13 +27,13 @@
           //Checks if the page form had been filled and submitted
           if(!empty($_POST["recipientPublic"]) && !empty($_POST["messageToEncode"])){
             //Attempts to retrieve recipient's private key from their public key
-            //The specified row's "lastUsed" column is then updated with a more recent time
             $privateKey = $database -> select("SELECT privateKey FROM userKeys WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]) . ";")[0]["privateKey"];
-            $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]));
             //Sets the "toReturn" variable to the encoded message unless the main query fails
             if($privateKey === false){
               echo "toReturn = false;";
             }else{
+              //The specified row's "lastUsed" column is then updated with a more recent time
+              $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]));
               //Attempts to encrypt message
               $encrypted = "";
               try{
@@ -43,7 +43,7 @@
               }
               echo "toReturn = \"" . $encrypted . "\";";
             }
-            //Clears entered data so that reloads don't unecessarily trigger modals
+            //Clears entered data so that page reloads don't unecessarily trigger modals
             $_POST = array();
           }
         ?>
@@ -51,7 +51,7 @@
         //Checks to see if the PHP sent the encoded message
         if(toReturn !== undefined && toReturn !== null){
           //Checks to see if the PHP query amounted to nothing in the case that the query was attempted
-          if(toReturn = false){
+          if(toReturn == false){
             //Sends error message
             document.getElementById("status").innerHTML = "There was an error processing your request";
             document.getElementById("encrypted").innerHTML = toReturn;
@@ -100,14 +100,14 @@
             <p>Here you can encode a message.</p>
             <p>To encode a message, write your message and the recipient's address or public key below. An encoded version of the message will be returned.</p>
             <p>Once your message is encoded, you will need to send the encoded version yourself to the recipient; however, you won't need to worry about your original message being read.</p>
-            <p>The encoding process involves a message going through many different phases to make it unreadable. The first step taken is that the recipient's private key is found out from their public key. The user's private key is then used as the random number generator's (RNG's) seed. Then, the message gets <a href = "https://en.wikipedia.org/wiki/Caesar_cipher">Caeser Ciphered</a> with each shift amount being a random number for each letter. Then, each letter of the message gets shuffled. Afterwards, random letters are inserted in the message. Finally, the message's length and the recipient's public key are inserted into the message to be used for decrypting it.</p>
+            <p>The encoding process involves a message going through many different phases to make it unreadable. The first step taken is that the recipient's private key is found out from their public key. The recipient's private key is then used as the random number generator's (RNG's) seed. Then, the message gets <a href = "https://en.wikipedia.org/wiki/Caesar_cipher">Caeser Ciphered</a> with each shift amount being a random number for each letter. Then, each letter of the message gets shuffled with random letters being inserted in between. Finally, the number for the amount of letters in the original message is inserted into the message to be used for decrypting it.</p>
           </div>
         </div>
         <br/>
         <div class = "row vertical-align">
           <div class = "col-sm-12 specialBlue img-rounded">
             <br/>
-            <form method = "post" action = "Encode.php">
+            <form method = "post" action = "index.php">
               <p>Message to encode:</p>
               <textarea class = "fit" rows = "15" name = "messageToEncode"></textarea>
               <br/><br/>

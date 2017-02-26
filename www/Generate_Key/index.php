@@ -72,6 +72,7 @@
             <p>Here, you can generate yourself a private key (password) and a public key (address).</p>
             <p>To use the public key, just give it to anyone who may want to write you a message. When they write you a message, they need to set the recipient's address as your public key. To decode the message, you take the message and input your private key (password). The original message will be displayed back.</p>
             <p>When you generate a private key, make sure you keep it secret. This software is only as strong as your private key (password). If someone can guess your private key, they can decrypt messages meant for only you. If you want a group to be able to recieve messages, make a public and private key for a group.</p>
+            <p>A forced expiration key is extra secure. Normally, keys get deleted within a week of disuse; however, with a forced expiration key, the key will get deleted within a day, no matter how much it was used.</p>
           </div>
         </div>
 
@@ -102,7 +103,7 @@
             <div class = "modal-footer specialBlue">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-            
+
           </div>
         </div>
       </div>
