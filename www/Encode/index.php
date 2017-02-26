@@ -127,7 +127,7 @@
 
             <div class = "modal-header specialBlue">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Encoded Message</h4>
+              <h3 class="modal-title">Encoded Message</h3>
             </div>
             <div class = "modal-body">
               <h3 id = "status"></h3>

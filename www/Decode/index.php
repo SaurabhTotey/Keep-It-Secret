@@ -53,9 +53,16 @@
            //Checks to see if the PHP query amounted to nothing in the case that the query was attempted
            if(toReturn == false){
              //Sends error message of invalid username and password
+             document.getElementById("status").innerHTML = "Invalid address and/or password";
+             document.getElementById("encrypted").innerHTML = toReturn;
+             console.log("Address and password didn't match");
            }else{
              //Sends decrypted message or error message
+             document.getElementById("status").innerHTML = "The message was decoded with the given address/password combination";
+             document.getElementById("encrypted").innerHTML = toReturn;
+             console.log("Successfully decoded message");
            }
+           $("#myModal").modal("show");
          }
       });
     </script>
@@ -108,6 +115,26 @@
               <br/><br/><br/>
               <input class = "fit" type = "submit">
             </form>
+          </div>
+        </div>
+      </div>
+
+      <div id = "myModal" class = "modal fade" role = "dialog">
+        <div class = "modal-dialog">
+          <div class = "modal-content img-rounded">
+
+            <div class = "modal-header specialBlue">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 class="modal-title">Decoded Message</h3>
+            </div>
+            <div class = "modal-body">
+              <h3 id = "status"></h3>
+              <p id = "decrypted"></p>
+            </div>
+            <div class = "modal-footer specialBlue">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
           </div>
         </div>
       </div>

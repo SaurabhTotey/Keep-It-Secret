@@ -90,7 +90,7 @@
 
             <div class = "modal-header specialBlue">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Generate Keys</h4>
+              <h3 class="modal-title">Generate Keys</h3>
             </div>
             <div class = "modal-body">
               <form method = "post" action = "index.php">
