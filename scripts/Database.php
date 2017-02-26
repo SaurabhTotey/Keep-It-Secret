@@ -11,7 +11,7 @@
      */
     public function connect(){
       if(!isset(self::$connection)){
-        $config = parse_ini_file('../config.ini');
+        $config = parse_ini_file('config.ini');
         self::$connection = new mysqli($config['connectionURL'], $config['username'], $config['password'], $config['databaseName']);
       }elseif(self::$connection === false){
         //TODO

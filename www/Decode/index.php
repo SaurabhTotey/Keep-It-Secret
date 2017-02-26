@@ -12,7 +12,7 @@
     <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel = "stylesheet" href = "AllPage.css"/>
+    <link rel = "stylesheet" href = "../AllPage.css"/>
 
     <script>
       $(document).ready(function(){
@@ -54,12 +54,12 @@
            if(toReturn == false){
              //Sends error message of invalid username and password
              document.getElementById("status").innerHTML = "Invalid address and/or password";
-             document.getElementById("encrypted").innerHTML = toReturn;
+             document.getElementById("decrypted").innerHTML = toReturn;
              console.log("Address and password didn't match");
            }else{
              //Sends decrypted message or error message
              document.getElementById("status").innerHTML = "The message was decoded with the given address/password combination";
-             document.getElementById("encrypted").innerHTML = toReturn;
+             document.getElementById("decrypted").innerHTML = toReturn;
              console.log("Successfully decoded message");
            }
            $("#myModal").modal("show");
@@ -102,19 +102,20 @@
             <p>The decoding process works by going the same processes as the encoding step, except doing the steps backwards while generating the same random numbers that would have been generated in encoding.</p>
           </div>
         </div>
+        <br/>
         <div class = "row vertical-align">
           <div class = "col-sm-12 specialBlue img-rounded">
+            <br/>
             <form method = "post" action = "index.php">
               <p>Message to decode:</p>
               <textarea class = "fit" rows = "15" name = "messageToDecode"></textarea>
               <br/><br/>
-              <p>Your public key:</p>
-              <input class = "fit" type = "text" name = "publicKey">
-              <p>Your private key:</p>
-              <input class = "fit" type ="password" name = "privateKey">
-              <br/><br/><br/>
+              <p>Your public key: <br/> <input class = "fit" type = "text" name = "publicKey"></p>
+              <p>Your private key: <br/> <input class = "fit" type ="password" name = "privateKey"></p>
+              <br/>
               <input class = "fit" type = "submit">
             </form>
+            <br/>
           </div>
         </div>
       </div>

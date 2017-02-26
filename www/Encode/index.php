@@ -12,7 +12,7 @@
     <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel = "stylesheet" href = "AllPage.css"/>
+    <link rel = "stylesheet" href = "../AllPage.css"/>
 
     <script>
       $(document).ready(function(){
@@ -81,7 +81,7 @@
       <div class = "navbar fit navbar-light siteNav img-rounded">
         <ul class = "nav navbar-nav fit img-rounded specialBlue">
           <li><a href = "../index.html" class = "linkGlyph">Home</a></li>
-          <li><a href = "../GenerateKey/index.php" class = "linkGlyph">Generate a Key</a></li>
+          <li><a href = "../Generate_Key/index.php" class = "linkGlyph">Generate a Key</a></li>
           <li class = "active"><a href="index.php" class = "linkGlyph">Encode a Message</a></li>
           <li><a href = "../Decode/index.php" class = "linkGlyph">Decode a Message</a></li>
         </ul>

@@ -12,7 +12,7 @@
     <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel = "stylesheet" href = "AllPage.css"/>
+    <link rel = "stylesheet" href = "../AllPage.css"/>
 
     <script>
       $(document).ready(function(){<?php
@@ -96,7 +96,7 @@
               <form method = "post" action = "index.php">
                 <p class = "fit">Public Key (Address): <br/> <input type = "text" name = "publicKey" value = "" class = "fit"></p>
                 <p class = "fit">Private Key (Password): <br/> <input type = "password" name = "privateKey" value = "" class = "fit"></p>
-                <p class = "fit">Force Expire? <br/> <input type = "checkbox" name = "forcedExpiration"></p>
+                <p class = "fit">Force Expire? <input type = "checkbox" name = "forcedExpiration"></p>
                 <input type = "submit" class = "fit submit">
               </form>
             </div>
@@ -107,6 +107,8 @@
           </div>
         </div>
       </div>
+
+      <br/>
 
       <div id = "keyAlert" class = "fit alert alert-dismissable">
       </div>
