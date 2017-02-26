@@ -41,7 +41,7 @@
               }catch(Exception $e){
                 $encrypted = $e -> getMessage();
               }
-              echo "toReturn = \"" . $encrypted . "\";";
+              echo "toReturn = " . $database -> quote($encrypted) . ";";
             }
             //Clears entered data so that page reloads don't unecessarily trigger modals
             $_POST = array();
@@ -131,7 +131,7 @@
             </div>
             <div class = "modal-body">
               <h3 id = "status"></h3>
-              <p id = "encrypted"></p>
+              <p id = "encrypted" class = "specialBlue fit img-rounded"></p>
             </div>
             <div class = "modal-footer specialBlue">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

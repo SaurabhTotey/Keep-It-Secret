@@ -39,7 +39,7 @@
               }catch(Exception $e){
                 $decrypted = $e -> getMessage();
               }
-              echo "toReturn = \"" . $decrypted . "\";";
+              echo "toReturn = " . $database -> quote($decrypted) . ";";
             }else{
               echo "toReturn = false;";
             }
@@ -58,7 +58,7 @@
              console.log("Address and password didn't match");
            }else{
              //Sends decrypted message or error message
-             document.getElementById("status").innerHTML = "The message was decoded with the given address/password combination";
+             document.getElementById("status").innerHTML = "The message has been decoded";
              document.getElementById("decrypted").innerHTML = toReturn;
              console.log("Successfully decoded message");
            }
@@ -130,7 +130,7 @@
             </div>
             <div class = "modal-body">
               <h3 id = "status"></h3>
-              <p id = "decrypted"></p>
+              <p id = "decrypted" class = "specialBlue fit img-rounded"></p>
             </div>
             <div class = "modal-footer specialBlue">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
