@@ -122,18 +122,19 @@
 
       <div id = "myModal" class = "modal fade" role = "dialog">
         <div class = "modal-dialog">
-          <div class = "modal-content img-rounded">
+          <div class = "modal-content specialBlue">
 
-            <div class = "modal-header specialBlue">
+            <div class = "modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h3 class="modal-title">Decoded Message</h3>
             </div>
-            <div class = "modal-body specialBlue">
+            <div class = "modal-body">
               <h4 id = "status"></h4>
-              <p id = "decrypted" class = "fit img-rounded outputs"></p>
-              <button id = "copy" type = "button" class = "btn btn-default fit img-rounded">Copy to clipboard</button>
+              <div id = "decrypted" class = "fit img-rounded outputs"></div>
+              <br/>
+              <button id = "copy" type = "button" class = "btn btn-default btn-block btn-info">Copy to clipboard</button>
             </div>
-            <div class = "modal-footer specialBlue">
+            <div class = "modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
 
