@@ -43,7 +43,7 @@
     <div class = "main">
 
       <div class = "masthead">
-        <a href = "index.html"><img src="images/Masthead.png" class = "fit rounded-img" id = "bannerImg"/></a>
+        <a href = ".."><img src="../Masthead.png" class = "fit rounded-img" id = "bannerImg"/></a>
       </div>
 
       <br/>

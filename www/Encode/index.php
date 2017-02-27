@@ -41,7 +41,7 @@
               }catch(Exception $e){
                 $encrypted = $e -> getMessage();
               }
-              echo "toReturn = " . $database -> quote($encrypted) . ";";
+              echo "toReturn = " . json_encode($encrypted) . ";";
             }
             //Clears entered data so that page reloads don't unecessarily trigger modals
             $_POST = array();
@@ -73,7 +73,7 @@
     <div class = "main">
 
       <div class = "masthead">
-        <a href = "../index.html"><img src="images/Masthead.png" class = "fit rounded-img" id = "bannerImg"/></a>
+        <a href = ".."><img src="../Masthead.png" class = "fit rounded-img" id = "bannerImg"/></a>
       </div>
 
       <br/>
@@ -130,8 +130,9 @@
               <h3 class="modal-title">Encoded Message</h3>
             </div>
             <div class = "modal-body specialBlue">
-              <h3 id = "status"></h3>
-              <p id = "encrypted" class = "fit img-rounded resultText"></p>
+              <h4 id = "status"></h4>
+              <p id = "encrypted" class = "fit img-rounded outputs"></p>
+              <button id = "copy" type = "button" class = "btn btn-default fit img-rounded">Copy to clipboard</button>
             </div>
             <div class = "modal-footer specialBlue">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
