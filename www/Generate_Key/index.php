@@ -17,9 +17,12 @@
     <script>
       $(document).ready(function(){<?php
         include "../../scripts/Database.php";
+        error_reporting(0);
+
         //Constructs a database object
         $database = new Database();
         $database -> connect();
+
         //Checks if the page form had been filled and submitted
         if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"])){
           //Attempts to insert user's keys into the database
@@ -31,6 +34,7 @@
           }else{
             echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href= '#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Cannot connect to database or address was already taken. Try checking your connection or changing your address.\";";
           }
+
           //Clears entered information so that future reloads don't try and re-insert keys and send an error notification
           $_POST = array();
         }

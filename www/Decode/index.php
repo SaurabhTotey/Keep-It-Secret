@@ -17,32 +17,42 @@
     <script>
       $(document).ready(function(){
         var toReturn;
+        var originalMessage;
 
         <?php
+          error_reporting(0);
           include "../../scripts/Database.php";
           include "../../scripts/ManipulateText.php";
 
           //Creates a database object
           $database = new Database();
           $database -> connect();
+
           //Checks if the page form had been filled and submitted
           if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"]) && !empty($_POST["messageToDecode"])){
             //Checks that the given address and password match
-            $hashedPassword = $database -> select("SELECT privateKey FROM userKeys WHERE publicKey = " . $database -> quote($_POST["publicKey"]) . ";")[0]["privateKey"];
-            if(password_verify($_POST["privateKey"], $hashedPassword)){
-              //Updates the "lastUsed" column of the database if the password and address were used and matched
-              $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["publicKey"]));
-              //Attempts to decrypt the message
-              $decrypted = "";
-              try{
-                $decrypted = decodeMessage($_POST["messageToDecode"], $hashedPassword);
-              }catch(Exception $e){
-                $decrypted = $e -> getMessage();
+            //Otherwise, a JavaScript variable is set to false so alternate JavaScript code will run after the given public and private keys don't match or exist
+            try{
+              $hashedPassword = $database -> select("SELECT privateKey FROM userKeys WHERE publicKey = " . $database -> quote($_POST["publicKey"]) . ";");
+              if($hashedPassword !== false && !empty($hashedPassword)){
+                $hashedPassword = $hashedPassword[0]["privateKey"];
+                if(password_verify($_POST["privateKey"], $hashedPassword)){
+                  //Updates the "lastUsed" column of the database if the password and address were used and matched
+                  $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["publicKey"]));
+                  //Attempts to decrypt the message
+                  $decrypted = "";
+                  $decrypted = decodeMessage($_POST["messageToDecode"], $hashedPassword);
+                  echo "toReturn = " . json_encode($decrypted) . ";";
+                }else{
+                  throw new Exception("Keys don't match", 1);
+                }
+              }else{
+                throw new Exception("Key doesn't exist", 1);
               }
-              echo "toReturn = " . json_encode($decrypted) . ";";
-            }else{
+            }catch(Exception $e){
               echo "toReturn = false;";
             }
+            echo "originalMessage = " . json_encode($_POST["messageToDecode"]) . ";";
             //Clears entered data so that page reloads don't unecessarily trigger modals
             $_POST = array();
           }
@@ -55,6 +65,7 @@
              //Sends error message of invalid username and password
              document.getElementById("status").innerHTML = "Invalid address and/or password";
              document.getElementById("decrypted").innerHTML = toReturn;
+             document.getElementById("input").innerHTML = originalMessage;
              console.log("Address and password didn't match");
            }else{
              //Sends decrypted message or error message
@@ -108,7 +119,7 @@
             <br/>
             <form method = "post" action = "<?php echo $_SERVER['PHP_SELF']; ?>">
               <p>Message to decode:</p>
-              <textarea class = "fit" rows = "15" name = "messageToDecode"></textarea>
+              <textarea id = "input" class = "fit" rows = "15" name = "messageToDecode"></textarea>
               <br/><br/>
               <p>Your public key: <br/> <input class = "fit" type = "text" name = "publicKey"></p>
               <p>Your private key: <br/> <input class = "fit" type ="password" name = "privateKey"></p>

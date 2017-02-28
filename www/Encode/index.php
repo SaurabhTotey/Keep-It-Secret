@@ -17,32 +17,37 @@
     <script>
       $(document).ready(function(){
         var toReturn;
+        var originalMessage;
 
         <?php
+          error_reporting(0);
           include "../../scripts/Database.php";
           include "../../scripts/ManipulateText.php";
+
           //Creates a database object
           $database = new Database();
           $database -> connect();
+
           //Checks if the page form had been filled and submitted
           if(!empty($_POST["recipientPublic"]) && !empty($_POST["messageToEncode"])){
-            //Attempts to retrieve recipient's private key from their public key
-            $privateKey = $database -> select("SELECT privateKey FROM userKeys WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]) . ";")[0]["privateKey"];
-            //Sets the "toReturn" variable to the encoded message unless the main query fails
-            if($privateKey === false){
-              echo "toReturn = false;";
-            }else{
-              //The specified row's "lastUsed" column is then updated with a more recent time
-              $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]));
-              //Attempts to encrypt message
-              $encrypted = "";
-              try{
+            //Attempts to retrieve the row of recipient's private key from their public key
+            //Otherwise, a JavaScript variable is set to false so alternate JavaScript code will run after the given address doesn't exist
+            try{
+              $privateKey = $database -> select("SELECT privateKey FROM userKeys WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]) . ";");
+              if($privateKey !== false && !empty($privateKey)){
+                $privateKey = $privateKey[0]["privateKey"];
+                //The specified row's "lastUsed" column is then updated with a more recent time
+                $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]));
+                //Attempts to encrypt message
                 $encrypted = encodeMessage($_POST["messageToEncode"], $privateKey);
-              }catch(Exception $e){
-                $encrypted = $e -> getMessage();
+                echo "toReturn = " . json_encode($encrypted) . ";";
+              }else{
+                throw new Exception("Key doesn't exist", 1);
               }
-              echo "toReturn = " . json_encode($encrypted) . ";";
+            }catch (Exception $e){
+              echo "toReturn = false;";
             }
+            echo "originalMessage = " . json_encode($_POST["messageToEncode"]) . ";";
             //Clears entered data so that page reloads don't unecessarily trigger modals
             $_POST = array();
           }
@@ -53,8 +58,9 @@
           //Checks to see if the PHP query amounted to nothing in the case that the query was attempted
           if(toReturn == false){
             //Sends error message
-            document.getElementById("status").innerHTML = "There was an error processing your request";
+            document.getElementById("status").innerHTML = "There was an error processing your request; try checking your public key";
             document.getElementById("encrypted").innerHTML = toReturn;
+            document.getElementById("input").innerHTML = originalMessage;
             console.log("Could not find public key");
           }else{
             //Displays the encoded message
@@ -109,7 +115,7 @@
             <br/>
             <form method = "post" action = "<?php echo $_SERVER['PHP_SELF']; ?>">
               <p>Message to encode:</p>
-              <textarea class = "fit" rows = "15" name = "messageToEncode"></textarea>
+              <textarea id = "input" class = "fit" rows = "15" name = "messageToEncode"></textarea>
               <br/><br/>
               <p>Recipient's public key:</p>
               <input class = "fit" type = "text" name = "recipientPublic">
