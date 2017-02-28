@@ -84,6 +84,9 @@
     $temp = "  ";
     for($i = 2; strcmp((string) substr($temp, 0, 1), ";") !== 0; $i++){
       $temp = substr($message, -$i);
+      if($i == strlen($message)){
+        return "Sorry, the message must have been copied incorrectly... :(";
+      }
     }
     $messageLength = intval(substr($temp, 1));
     $message = substr($message, 0, -strlen($temp));

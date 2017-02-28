@@ -56,6 +56,10 @@ ul.nav{
   padding: 5px;
 }
 
+.modal-body div {
+  word-wrap: break-word;
+}
+
 .linkGlyph{
   color:black;
 }

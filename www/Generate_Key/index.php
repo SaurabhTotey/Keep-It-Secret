@@ -5,7 +5,7 @@
 
     <meta charset = "utf-8">
 
-    <link rel = "icon" href="images/icon.png"/>
+    <link rel = "icon" href="../icon.png"/>
     <title>Keep it Secret</title>
 
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

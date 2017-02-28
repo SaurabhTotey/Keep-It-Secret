@@ -5,7 +5,7 @@
 
     <meta charset = "utf-8">
 
-    <link rel = "icon" href="images/icon.png"/>
+    <link rel = "icon" href="../icon.png"/>
     <title>Keep it Secret</title>
 
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -15,6 +15,11 @@
     <link rel = "stylesheet" href = "../AllPage.css"/>
 
     <script>
+
+      function makeSafe(stringToSave){
+        return $('<span>').text(stringToSave).html();
+      }
+
       $(document).ready(function(){
         var toReturn;
         var originalMessage;
@@ -42,7 +47,7 @@
                   //Attempts to decrypt the message
                   $decrypted = "";
                   $decrypted = decodeMessage($_POST["messageToDecode"], $hashedPassword);
-                  echo "toReturn = " . json_encode($decrypted) . ";";
+                  echo "toReturn = makeSafe(" . json_encode($decrypted) . ");";
                 }else{
                   throw new Exception("Keys don't match", 1);
                 }
@@ -52,7 +57,7 @@
             }catch(Exception $e){
               echo "toReturn = false;";
             }
-            echo "originalMessage = " . json_encode($_POST["messageToDecode"]) . ";";
+            echo "originalMessage = makeSafe(" . json_encode($_POST["messageToDecode"]) . ");";
             //Clears entered data so that page reloads don't unecessarily trigger modals
             $_POST = array();
           }
