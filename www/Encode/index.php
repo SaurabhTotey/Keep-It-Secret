@@ -21,6 +21,23 @@
       }
 
       $(document).ready(function(){
+
+        //This function adds the code for the button that copies the encrypted message
+        var copyButton = document.querySelector("#copy");
+        copyButton.addEventListener("click", function(event){
+          var text = document.querySelector("#encrypted");
+          var range = document.createRange();
+          range.selectNode(text);
+          window.getSelection().addRange(range);
+          try{
+            document.execCommand("copy");
+            console.log("Copy was successfully attempted");
+          }catch(e){
+            console.log("Copy was unsuccessfully attempted");
+          }
+          window.getSelection().removeAllRanges();
+        });
+
         var toReturn;
         var originalMessage;
 
@@ -108,7 +125,7 @@
         <div class = "row vertical-align">
           <div class = "col-sm-12 specialBlue img-rounded">
             <h3>Encode a message</h3>
-            <p>Here you can encode a message.</p>
+            <p>Here you can encode a message. Messages with invalid characters will decode correctly for every letter except for invalid letters.</p>
             <p>To encode a message, write your message and the recipient's address or public key below. An encoded version of the message will be returned.</p>
             <p>Once your message is encoded, you will need to send the encoded version yourself to the recipient; however, you won't need to worry about your original message being read.</p>
             <p>The encoding process involves a message going through many different phases to make it unreadable. The first step taken is that the recipient's private key is found out from their public key. The recipient's private key is then used as the random number generator's (RNG's) seed. Then, the message gets <a href = "https://en.wikipedia.org/wiki/Caesar_cipher">Caeser Ciphered</a> with each shift amount being a random number for each letter. Then, each letter of the message gets shuffled with random letters being inserted in between. Finally, the number for the amount of letters in the original message is inserted into the message to be used for decrypting it.</p>

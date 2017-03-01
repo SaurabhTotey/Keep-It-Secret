@@ -1,5 +1,7 @@
 <?php
 
+  //TODO fix encryption / decryption breaking for long messages; obfuscate message length
+
   $allChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,./<>?;\':[]{}-=_+"\\|!@#$%^&*() ';
 
   /*

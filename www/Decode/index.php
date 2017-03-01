@@ -21,6 +21,23 @@
       }
 
       $(document).ready(function(){
+
+        //This function adds the code for the button that copies the decrypted message
+        var copyButton = document.querySelector("#copy");
+        copyButton.addEventListener("click", function(event){
+          var text = document.querySelector("#decrypted");
+          var range = document.createRange();
+          range.selectNode(text);
+          window.getSelection().addRange(range);
+          try{
+            document.execCommand("copy");
+            console.log("Copy was successfully attempted");
+          }catch(e){
+            console.log("Copy was unsuccessfully attempted");
+          }
+          window.getSelection().removeAllRanges();
+        });
+
         var toReturn;
         var originalMessage;
 
@@ -113,7 +130,7 @@
         <div class = "row vertical-align">
           <div class = "col-sm-12 specialBlue img-rounded">
             <h3>Decode a message</h3>
-            <p>Here you can decode an encoded message.</p>
+            <p>Here you can decode an encoded message. If the original message had invalid characters, the characters won't decode correctly.</p>
             <p>To decode, you must enter the encoded message as well as the public and private keys for the intended recipient. If the public or private keys are wrong, the decoding process will either error, or it will return something random.</p>
             <p>The decoding process works by going the same processes as the encoding step, except doing the steps backwards while generating the same random numbers that would have been generated in encoding.</p>
           </div>
