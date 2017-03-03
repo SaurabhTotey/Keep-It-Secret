@@ -44,6 +44,7 @@
     //Mess length is needed for decryption
     mt_srand(stringToNumber($private_key));
     $encoded = "";
+    $lengthDiffusion =  + mt_rand(-150, 150);
     $messageLength = strlen($message);
     //This loop goes through each letter of the message and then shifts it up a certain amount of characters using the numberToLetter method
     //It takes the letter's number (with stringToNumber) and then adds a random amount on to that number and then reconverts the number to a letter
@@ -70,7 +71,7 @@
     }
     //This part adds the encoded message and concatenates it with a ";" and the original message length
     //The original message length is necessary for decryption because it was used for loop counters and such in encryption
-    return $encoded . ";" . $messageLength;
+    return $encoded . ";" . ($messageLength + $lengthDiffusion);
   }
 
   /*
@@ -87,10 +88,10 @@
     for($i = 2; strcmp((string) substr($temp, 0, 1), ";") !== 0; $i++){
       $temp = substr($message, -$i);
       if($i == strlen($message)){
-        return "Sorry, the message must have been copied incorrectly... :(";
+        throw new Exception("Sorry, the message must have been copied incorrectly... :(", 1);
       }
     }
-    $messageLength = intval(substr($temp, 1));
+    $messageLength = intval(substr($temp, 1)) - mt_rand(-150, 150);
     $message = substr($message, 0, -strlen($temp));
     //This part makes the "decoded" variable the right length
     for($i = 0; $i < $messageLength; $i++){

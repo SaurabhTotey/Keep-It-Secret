@@ -85,7 +85,7 @@
            //Checks to see if the PHP query amounted to nothing in the case that the query was attempted
            if(toReturn == false){
              //Sends error message of invalid username and password
-             document.getElementById("status").innerHTML = "Invalid address and/or password";
+             document.getElementById("status").innerHTML = "Invalid address, password, or message";
              document.getElementById("decrypted").innerHTML = toReturn;
              document.getElementById("input").innerHTML = originalMessage;
              console.log("Address and password didn't match");
