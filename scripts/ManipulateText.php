@@ -9,7 +9,7 @@
    */
   function randLetter(){
     global $allChars;
-    return substr($allChars, mt_rand(0, strlen($allChars)), 1);
+    return substr($allChars, mt_rand(0, strlen($allChars) - 1), 1);
   }
 
   /*
@@ -54,14 +54,14 @@
     //"filling" is inserting random letters in between all "legit" letters
     //anagramming happens when random "legit" letters are inserted in no particular order
     $alreadyUsed = array();
-    $randSpot = -1;
+    $randSpot = 0;
     while(sizeof($alreadyUsed) < $messageLength){
       while(mt_rand(0, 1) == 1){
         $encoded .= randLetter();
       }
-      while($randSpot < 0 || in_array($randSpot, $alreadyUsed)){
+      do{
         $randSpot = mt_rand(0, $messageLength - 1);
-      }
+      }while(in_array($randSpot, $alreadyUsed));
       $alreadyUsed[] = $randSpot;
       $encoded .= substr($message, $randSpot, 1);
     }
@@ -107,16 +107,16 @@
     //But for anagramming, it just records the location of the letter it would have taken and the location of where the letter was put
     $orderUsed = array();
     $legitLocations = array();
-    $randSpot = -1;
+    $randSpot = 0;
     $tempLength = 0;
     while(sizeof($orderUsed) < $messageLength){
       while(mt_rand(0, 1) == 1){
         randLetter();
         $tempLength++;
       }
-      while($randSpot < 0 || in_array($randSpot, $orderUsed)){
+      do{
         $randSpot = mt_rand(0, $messageLength - 1);
-      }
+      }while(in_array($randSpot, $orderUsed));
       $orderUsed[] = $randSpot;
       $legitLocations[] = $tempLength;
       $tempLength++;
@@ -125,7 +125,7 @@
       randLetter();
       $tempLength++;
     }
-    //This part uses obtained indices of legit jumped and shifted letters to reconstruct the jumped and shifted message (but not anagrammed and filled anymore)
+    //This part uses obtained indices of legit shifted letters to reconstruct the shifted message (but not anagrammed and filled anymore)
     for($i = 0; $i < $messageLength; $i++){
       $decoded = substr_replace($decoded, substr($message, $legitLocations[$i], 1), $orderUsed[$i], 1);
     }

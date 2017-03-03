@@ -75,7 +75,7 @@
               echo "toReturn = false;";
             }
             echo "originalMessage = makeSafe(" . json_encode($_POST["messageToDecode"]) . ");";
-            //Clears entered data so that page reloads don't unecessarily trigger modals
+            //Clears entered data just in case
             $_POST = array();
           }
          ?>
@@ -131,7 +131,7 @@
           <div class = "col-sm-12 specialBlue img-rounded">
             <h3>Decode a message</h3>
             <p>Here you can decode an encoded message. If the original message had invalid characters, the characters won't decode correctly.</p>
-            <p>To decode, you must enter the encoded message as well as the public and private keys for the intended recipient. If the public or private keys are wrong, the decoding process will either error, or it will return something random.</p>
+            <p>To decode, you must enter the encoded message as well as the public and private keys for the message's intended recipient. If the public or private keys are wrong, the decoding process will either error, or it will return something random.</p>
             <p>The decoding process works by going the same processes as the encoding step, except doing the steps backwards while generating the same random numbers that would have been generated in encoding.</p>
           </div>
         </div>
