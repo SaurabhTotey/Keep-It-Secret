@@ -24,15 +24,19 @@
         $database -> connect();
 
         //Checks if the page form had been filled and submitted
-        if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"])){
-          //Attempts to insert user's keys into the database
-          $forceExpire = isset($_POST["forcedExpiration"])? 1 : 0;
-          $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote(password_hash($_POST["privateKey"], PASSWORD_BCRYPT)) . "," . $forceExpire . ");");
+        if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"]) && !empty($_POST["confirmPrivate"])){
+          //Attempts to insert user's keys into the database if the keys match
+          if(strcmp($_POST["privateKey"], $_POST["confirmPrivate"]) == 0){
+            $forceExpire = isset($_POST["forcedExpiration"])? 1 : 0;
+            $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote(password_hash($_POST["privateKey"], PASSWORD_BCRYPT)) . "," . $forceExpire . ");");
+          }else{
+            $result = false;
+          }
           //Sends out a notification saying whether the key insertion had been successful
           if($result){
             echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Your keys have been generated!\";";
           }else{
-            echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href= '#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Cannot connect to database or address was already taken. Try checking your connection or changing your public key.\";";
+            echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href= '#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Address was already taken or private keys don't match. Try checking your connection, changing your public key, and checking your private keys.\";";
           }
 
           //Clears entered information so that future reloads don't try and re-insert keys and send an error notification
@@ -64,7 +68,6 @@
       <script>
         $(document).ready(function(){
           document.getElementsByClassName("siteNav")[0].style.marginTop = document.getElementById("bannerImg").height + "px";
-          document.getElementsByClassName("main")[0].style.height = window.innerHeight + "px";
         });
       </script>
 
@@ -100,6 +103,7 @@
               <form method = "post" action = "<?php echo $_SERVER['PHP_SELF']; ?>">
                 <p class = "fit">Public Key (Address): <br/> <input type = "text" name = "publicKey" value = "" class = "fit"></p>
                 <p class = "fit">Private Key (Password): <br/> <input type = "password" name = "privateKey" value = "" class = "fit"></p>
+                <p class = "fit">Confirm Private Key: <br/> <input type = "password" name = "confirmPrivate" value = "" class = "fit"></p>
                 <p class = "fit">Force Expire? <input type = "checkbox" name = "forcedExpiration"></p>
                 <input type = "submit" class = "fit submit">
               </form>

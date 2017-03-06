@@ -1,8 +1,6 @@
 <?php
 
-  //TODO fix encryption / decryption breaking for long messages; obfuscate message length
-
-  $allChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,./<>?;\':[]{}-=_+"\\|!@#$%^&*() ';
+  $allChars = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
 
   /*
    *  This function returns a random letter from the above string of all characters
