@@ -43,8 +43,8 @@
 
         <?php
           error_reporting(0);
-          include "../../scripts/Database.php";
-          include "../../scripts/ManipulateText.php";
+          require_once("../../scripts/Database.php");
+          require_once("../../scripts/ManipulateText.php");
 
           //Creates a database object
           $database = new Database();

@@ -16,8 +16,8 @@
 
     <script>
       $(document).ready(function(){<?php
-        include "../../scripts/Database.php";
         error_reporting(0);
+        require_once("../../scripts/Database.php");
 
         //Constructs a database object
         $database = new Database();
