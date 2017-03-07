@@ -126,25 +126,25 @@
       <div class = "container fit footerBox img-rounded">
         <div class = "row">
           <div class = "col-sm-3">
-            <a role = "button" href = "mailto:SaurabhTotey@gmail.com" class = "btn btn-block footBtn">
+            <a role = "button" href = "mailto:SaurabhTotey@gmail.com" class = "btn btn-block footBtn" target = "_blank">
               <h5>Creator Email</h5>
               <p>SaurabhTotey@gmail.com</p>
             </a>
           </div>
           <div class = "col-sm-3">
-            <a role = "button" href = "https://github.com/SaurabhTotey" class = "btn btn-block footBtn">
+            <a role = "button" href = "https://github.com/SaurabhTotey" class = "btn btn-block footBtn" target = "_blank">
               <h5>Creator GitHub</h5>
               <p>SaurabhTotey</p>
             </a>
           </div>
           <div class = "col-sm-3">
-            <a role = "button" href = "https://saurabhtotey.github.io/" class = "btn btn-block footBtn">
+            <a role = "button" href = "https://saurabhtotey.github.io/" class = "btn btn-block footBtn" target = "_blank">
               <h5>Creator Portfolio</h5>
               <p>saurabhtotey.github.io</p>
             </a>
           </div>
           <div class = "col-sm-3">
-            <a role = "button" href = "#" class = "btn btn-block footBtn">
+            <a role = "button" href = "#" class = "btn btn-block footBtn" target = "_blank">
               <h5>Donate to Creator</h5>
               <p>Every penny helps!</p>
             </a>

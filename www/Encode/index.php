@@ -128,7 +128,7 @@
             <p>Here you can encode a message. Messages with invalid characters will decode correctly for every letter except for the invalid letters.</p>
             <p>To encode a message, write your message and the recipient's address or public key below. An encoded version of the message will be returned.</p>
             <p>Once your message is encoded, you will need to send the encoded version to the recipient; however, you won't need to worry about your original message being read or readable.</p>
-            <p>The encoding process involves a message going through many different phases to make it unreadable. The first step taken is that the recipient's private key is found out from their public key. The recipient's private key is then used as the random number generator's (RNG's) seed. Then, the message gets <a href = "https://en.wikipedia.org/wiki/Caesar_cipher">Caeser Ciphered</a> with each shift amount being a random number for each letter. Then, each letter of the message gets shuffled with random letters being inserted in between. Finally, a shifted number for the amount of letters in the original message is inserted into the message to be used for decrypting it.</p>
+            <p>The encoding process involves a message going through many different phases to make it unreadable. The first step taken is that the recipient's private key is found out from their public key. The recipient's private key is then used as the random number generator's (RNG's) seed. Then, the message gets <a href = "https://en.wikipedia.org/wiki/Caesar_cipher" target = "_blank">Caeser Ciphered</a> with each shift amount being a random number for each letter. Then, each letter of the message gets shuffled with random letters being inserted in between. Finally, a shifted number for the amount of letters in the original message is inserted into the message to be used for decrypting it.</p>
           </div>
         </div>
         <br/>
@@ -176,25 +176,25 @@
       <div class = "container fit footerBox img-rounded">
         <div class = "row">
           <div class = "col-sm-3">
-            <a role = "button" href = "mailto:SaurabhTotey@gmail.com" class = "btn btn-block footBtn">
+            <a role = "button" href = "mailto:SaurabhTotey@gmail.com" class = "btn btn-block footBtn" target = "_blank">
               <h5>Creator Email</h5>
               <p>SaurabhTotey@gmail.com</p>
             </a>
           </div>
           <div class = "col-sm-3">
-            <a role = "button" href = "https://github.com/SaurabhTotey" class = "btn btn-block footBtn">
+            <a role = "button" href = "https://github.com/SaurabhTotey" class = "btn btn-block footBtn" target = "_blank">
               <h5>Creator GitHub</h5>
               <p>SaurabhTotey</p>
             </a>
           </div>
           <div class = "col-sm-3">
-            <a role = "button" href = "https://saurabhtotey.github.io/" class = "btn btn-block footBtn">
+            <a role = "button" href = "https://saurabhtotey.github.io/" class = "btn btn-block footBtn" target = "_blank">
               <h5>Creator Portfolio</h5>
               <p>saurabhtotey.github.io</p>
             </a>
           </div>
           <div class = "col-sm-3">
-            <a role = "button" href = "#" class = "btn btn-block footBtn">
+            <a role = "button" href = "#" class = "btn btn-block footBtn" target = "_blank">
               <h5>Donate to Creator</h5>
               <p>Every penny helps!</p>
             </a>
