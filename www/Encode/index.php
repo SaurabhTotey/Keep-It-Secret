@@ -18,22 +18,6 @@
     <script>
       $(document).ready(function(){
 
-        //This function adds the code for the button that copies the encrypted message
-        var copyButton = document.querySelector("#copy");
-        copyButton.addEventListener("click", function(event){
-          var text = document.querySelector("#encrypted");
-          var range = document.createRange();
-          range.selectNode(text);
-          window.getSelection().addRange(range);
-          try{
-            document.execCommand("copy");
-            console.log("Copy was successfully attempted");
-          }catch(e){
-            console.log("Copy was unsuccessfully attempted");
-          }
-          window.getSelection().removeAllRanges();
-        });
-
         var toReturn;
         var originalMessage;
 

@@ -16,34 +16,38 @@
     <script src = "../SharedScripts.js"></script>
 
     <script>
-      $(document).ready(function(){<?php
-        error_reporting(0);
-        require_once("../../scripts/Database.php");
+      $(document).ready(function(){
 
-        //Constructs a database object
-        $database = new Database();
-        $database -> connect();
+        <?php
+          error_reporting(0);
+          require_once("../../scripts/Database.php");
 
-        //Checks if the page form had been filled and submitted
-        if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"]) && !empty($_POST["confirmPrivate"])){
-          //Attempts to insert user's keys into the database if the keys match
-          if(strcmp($_POST["privateKey"], $_POST["confirmPrivate"]) == 0){
-            $forceExpire = isset($_POST["forcedExpiration"])? 1 : 0;
-            $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote(password_hash($_POST["privateKey"], PASSWORD_BCRYPT)) . "," . $forceExpire . ");");
-          }else{
-            $result = false;
+          //Constructs a database object
+          $database = new Database();
+          $database -> connect();
+
+          //Checks if the page form had been filled and submitted
+          if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"]) && !empty($_POST["confirmPrivate"])){
+            //Attempts to insert user's keys into the database if the keys match
+            if(strcmp($_POST["privateKey"], $_POST["confirmPrivate"]) == 0){
+              $forceExpire = isset($_POST["forcedExpiration"])? 1 : 0;
+              $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote(password_hash($_POST["privateKey"], PASSWORD_BCRYPT)) . "," . $forceExpire . ");");
+            }else{
+              $result = false;
+            }
+            //Sends out a notification saying whether the key insertion had been successful
+            if($result){
+              echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"Your keys have been generated!\";";
+            }else{
+              echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"Address was already taken or private keys don't match. Try checking your connection, changing your public key, and checking your private keys.\";";
+            }
+
+            //Clears entered information so that future reloads don't try and re-insert keys and send an error notification
+            $_POST = array();
           }
-          //Sends out a notification saying whether the key insertion had been successful
-          if($result){
-            echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"Your keys have been generated!\";";
-          }else{
-            echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"Address was already taken or private keys don't match. Try checking your connection, changing your public key, and checking your private keys.\";";
-          }
-
-          //Clears entered information so that future reloads don't try and re-insert keys and send an error notification
-          $_POST = array();
-        }
-      ?>});
+        ?>
+        
+      });
     </script>
 
   </head>
