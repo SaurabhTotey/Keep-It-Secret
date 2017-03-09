@@ -38,6 +38,11 @@ ul.nav{
   border-right: 0px;
 }
 
+.nav > li > a:focus, .nav > li > a:hover{
+  text-decoration: none;
+  background-color: transparent !important;
+}
+
 .vertical-align {
     display: flex;
     align-items: center;

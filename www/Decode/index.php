@@ -111,7 +111,7 @@
         </div>
         <br/>
         <div class = "row vertical-align">
-          <div class = "col-sm-12 specialBlue img-rounded">
+          <div class = "col-sm-12 specialBlue img-rounded fit">
             <br/>
             <form method = "post" action = "<?php echo $_SERVER['PHP_SELF']; ?>">
               <p>Message to decode:</p>
