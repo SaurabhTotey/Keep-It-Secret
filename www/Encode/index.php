@@ -13,13 +13,9 @@
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel = "stylesheet" href = "../AllPage.css"/>
+    <script src = "../SharedScripts.js"></script>
 
     <script>
-
-      function makeSafe(stringToSave){
-        return $('<span>').text(stringToSave).html();
-      }
-
       $(document).ready(function(){
 
         //This function adds the code for the button that copies the encrypted message
@@ -115,12 +111,6 @@
         </ul>
       </div>
 
-      <script>
-        $(document).ready(function(){
-          document.getElementsByClassName("siteNav")[0].style.marginTop = document.getElementById("bannerImg").height + "px";
-        });
-      </script>
-
       <div class = "container fit">
         <div class = "row vertical-align">
           <div class = "col-sm-12 specialBlue img-rounded">
@@ -171,6 +161,7 @@
         </div>
       </div>
 
+      <div id = "spacer"></div>
       <br/>
 
       <div class = "container fit footerBox img-rounded">

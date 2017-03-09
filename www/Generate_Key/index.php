@@ -13,6 +13,7 @@
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel = "stylesheet" href = "../AllPage.css"/>
+    <script src = "../SharedScripts.js"></script>
 
     <script>
       $(document).ready(function(){<?php
@@ -34,9 +35,9 @@
           }
           //Sends out a notification saying whether the key insertion had been successful
           if($result){
-            echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Your keys have been generated!\";";
+            echo "console.log(\"Successfully inserted keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-success\"; document.getElementById(\"keyAlert\").innerHTML = \"Your keys have been generated!\";";
           }else{
-            echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-dismissable alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"<a href= '#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Address was already taken or private keys don't match. Try checking your connection, changing your public key, and checking your private keys.\";";
+            echo "console.log(\"Could not insert keys into database\"); document.getElementById(\"keyAlert\").className = \"alert alert-danger\"; document.getElementById(\"keyAlert\").innerHTML = \"Address was already taken or private keys don't match. Try checking your connection, changing your public key, and checking your private keys.\";";
           }
 
           //Clears entered information so that future reloads don't try and re-insert keys and send an error notification
@@ -64,12 +65,6 @@
           <li><a href = "../Decode" class = "linkGlyph">Decode a Message</a></li>
         </ul>
       </div>
-
-      <script>
-        $(document).ready(function(){
-          document.getElementsByClassName("siteNav")[0].style.marginTop = document.getElementById("bannerImg").height + "px";
-        });
-      </script>
 
       <div class = "container fit">
 
@@ -118,9 +113,10 @@
 
       <br/>
 
-      <div id = "keyAlert" class = "fit alert alert-dismissable">
+      <div id = "keyAlert" class = "fit alert">
       </div>
 
+      <div id = "spacer"></div>
       <br/>
 
       <div class = "container fit footerBox img-rounded">

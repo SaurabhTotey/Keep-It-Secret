@@ -13,6 +13,7 @@
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel = "stylesheet" href = "AllPage.css"/>
+    <script src = "SharedScripts.js"></script>
 
   </head>
 
@@ -33,12 +34,6 @@
           <li><a href = "Decode" class = "linkGlyph">Decode a Message</a></li>
         </ul>
       </div>
-
-      <script>
-        $(document).ready(function(){
-          document.getElementsByClassName("siteNav")[0].style.marginTop = document.getElementById("bannerImg").height + "px";
-        });
-      </script>
 
       <div class = "jumbotron jumbotron-fluid img-rounded fit">
         <div class = "container">
@@ -85,6 +80,7 @@
         </div>
       </div>
 
+      <div id = "spacer"></div>
       <br/>
 
       <div class = "container fit footerBox img-rounded">
