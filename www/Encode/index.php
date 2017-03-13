@@ -98,7 +98,7 @@
       <div class = "container fit">
         <div class = "row vertical-align">
           <div class = "col-sm-12 specialBlue img-rounded">
-            <h3>Encode a message</h3>
+            <h3>Encode a Message</h3>
             <p>Here you can encode a message. Messages with invalid characters will decode correctly for every letter except for the invalid letters.</p>
             <p>To encode a message, write your message and the recipient's address or public key below. An encoded version of the message will be returned.</p>
             <p>Once your message is encoded, you will need to send the encoded version to the recipient; however, you won't need to worry about your original message being read or readable.</p>
@@ -177,7 +177,7 @@
         </div>
         <br/>
         <div class = "row col-sm-12">
-          <p>Page designed by Saurabh Totey. Images created by Elia Gorokhovsky. Code written by Saurabh Totey. Made in February, 2016. Inspired by our original "<a href = "http://www.codeskulptor.org/#user40_fVbe7V0msMMBR45.py">Code Talker Script</a>" and also inspired by the <a href = "http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html">"Stick Figure Guide to the Advanced Encryption Standard (AES)" by Moserware"</a>.</p>
+          <p>Page designed by Saurabh Totey. Images created by Elia Gorokhovsky. Code written by Saurabh Totey. Made in February, 2017. Inspired by our original "<a href = "http://www.codeskulptor.org/#user40_fVbe7V0msMMBR45.py" target = "_blank">Code Talker Script</a>" and also inspired by the <a href = "http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html" target = "_blank">"Stick Figure Guide to the Advanced Encryption Standard (AES)" by Moserware"</a>.</p>
         </div>
       </div>
 
