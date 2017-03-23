@@ -75,7 +75,7 @@
         <div class = "row vertical-align">
           <div class = "col-sm-12 specialBlue img-rounded">
             <h3>Generate a Key</h3>
-            <p>Here, you can generate yourself a private key (password) and a public key (address).</p>
+            <p>Here, you can generate yourself a private key (password) and a public key (address). The public and private keys can be any set of ASCII characters.</p>
             <p>To use the public key (address), just give it to anyone who may want to write you a message. When they write you a message, they need to input your public key (address). To decode the message, you take the message and input your private key (password). The original message will be displayed back.</p>
             <p>When you generate a private key (password), make sure you keep it secret. This software is only as strong as your private key (password). If someone can guess your private key, they can decrypt messages meant for only you. If you want a group to be able to decode messages, make a shared set of keys for the group.</p>
             <p>A forced expiration key is extra secure. Normally, keys get deleted within a week of disuse; however, with a forced expiration key, the key will get deleted within a day, no matter how much it was used.</p>
@@ -152,7 +152,7 @@
         </div>
         <br/>
         <div class = "row col-sm-12">
-          <p>Page designed by Saurabh Totey. Images created by Elia Gorokhovsky. Code written by Saurabh Totey. Made in February, 2017. Inspired by our original "<a href = "http://www.codeskulptor.org/#user40_fVbe7V0msMMBR45.py" target = "_blank">Code Talker Script</a>" and also inspired by the <a href = "http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html" target = "_blank">"Stick Figure Guide to the Advanced Encryption Standard (AES)" by Moserware"</a>.</p>
+          <p>Page design and code by Saurabh Totey. Made in February, 2017. Inspired by our original "<a href = "http://www.codeskulptor.org/#user40_fVbe7V0msMMBR45.py" target = "_blank">Code Talker Script</a>" and also inspired by the <a href = "http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html" target = "_blank">"Stick Figure Guide to the Advanced Encryption Standard (AES)" by Moserware"</a>.</p>
         </div>
       </div>
 

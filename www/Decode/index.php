@@ -104,7 +104,7 @@
         <div class = "row vertical-align">
           <div class = "col-sm-12 specialBlue img-rounded">
             <h3>Decode a Message</h3>
-            <p>Here you can decode an encoded message. If the original message had invalid characters, the characters won't decode correctly.</p>
+            <p>Here you can decode an encoded message. If the original message had non-ASCII characters, the characters won't decode correctly.</p>
             <p>To decode, you must enter the encoded message as well as the public and private keys for the message's intended recipient. If the public or private keys are wrong, the decoding process will either error, or it will return something random.</p>
             <p>The decoding process works by going the same processes as the encoding step, except doing the steps backwards while generating the same random numbers that would have been generated in encoding.</p>
           </div>
@@ -181,7 +181,7 @@
         </div>
         <br/>
         <div class = "row col-sm-12">
-          <p>Page designed by Saurabh Totey. Images created by Elia Gorokhovsky. Code written by Saurabh Totey. Made in February, 2017. Inspired by our original "<a href = "http://www.codeskulptor.org/#user40_fVbe7V0msMMBR45.py" target = "_blank">Code Talker Script</a>" and also inspired by the <a href = "http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html" target = "_blank">"Stick Figure Guide to the Advanced Encryption Standard (AES)" by Moserware"</a>.</p>
+          <p>Page design and code by Saurabh Totey. Made in February, 2017. Inspired by our original "<a href = "http://www.codeskulptor.org/#user40_fVbe7V0msMMBR45.py" target = "_blank">Code Talker Script</a>" and also inspired by the <a href = "http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html" target = "_blank">"Stick Figure Guide to the Advanced Encryption Standard (AES)" by Moserware"</a>.</p>
         </div>
       </div>
 

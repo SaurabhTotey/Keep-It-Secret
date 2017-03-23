@@ -99,7 +99,7 @@
         <div class = "row vertical-align">
           <div class = "col-sm-12 specialBlue img-rounded">
             <h3>Encode a Message</h3>
-            <p>Here you can encode a message. Messages with invalid characters will decode correctly for every letter except for the invalid letters.</p>
+            <p>Here you can encode a message of ASCII characters. Messages with invalid characters will decode correctly for every letter except for the invalid letters.</p>
             <p>To encode a message, write your message and the recipient's address or public key below. An encoded version of the message will be returned.</p>
             <p>Once your message is encoded, you will need to send the encoded version to the recipient; however, you won't need to worry about your original message being read or readable.</p>
             <p>The encoding process involves a message going through many different phases to make it unreadable. The first step taken is that the recipient's private key is found out from their public key. The recipient's private key is then used as the random number generator's (RNG's) seed. Then, the message gets <a href = "https://en.wikipedia.org/wiki/Caesar_cipher" target = "_blank">Caeser Ciphered</a> with each shift amount being a random number for each letter. Then, each letter of the message gets shuffled with random letters being inserted in between. Finally, a shifted number for the amount of letters in the original message is inserted into the message to be used for decrypting it.</p>
@@ -177,7 +177,7 @@
         </div>
         <br/>
         <div class = "row col-sm-12">
-          <p>Page designed by Saurabh Totey. Images created by Elia Gorokhovsky. Code written by Saurabh Totey. Made in February, 2017. Inspired by our original "<a href = "http://www.codeskulptor.org/#user40_fVbe7V0msMMBR45.py" target = "_blank">Code Talker Script</a>" and also inspired by the <a href = "http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html" target = "_blank">"Stick Figure Guide to the Advanced Encryption Standard (AES)" by Moserware"</a>.</p>
+          <p>Page design and code by Saurabh Totey. Made in February, 2017. Inspired by our original "<a href = "http://www.codeskulptor.org/#user40_fVbe7V0msMMBR45.py" target = "_blank">Code Talker Script</a>" and also inspired by the <a href = "http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html" target = "_blank">"Stick Figure Guide to the Advanced Encryption Standard (AES)" by Moserware"</a>.</p>
         </div>
       </div>
 
