@@ -1,7 +1,8 @@
 <?php
+
   class Database{
 
-    //The connection of the databaseName
+    //The connection of the database
     //This is used so that the connection isn't redone every time a connection is attempted
     protected static $connection;
 
@@ -12,26 +13,22 @@
     public function connect(){
       if(!isset(self::$connection)){
         $config = parse_ini_file('config.ini');
-        self::$connection = new mysqli($config['connectionURL'], $config['username'], $config['password'], $config['databaseName']);
-      }elseif(self::$connection === false){
-        //TODO
-        return false;
+        self::$connection = new pg_connect(getenv('DATABASE_URL'));
       }
       return self::$connection;
     }
 
     /*
      *  This function makes a query into the database
-     *  NOT SAFE
+     *  Queries the database with the given query string, but doesn't sanitize the inputs
      */
     public function query($query){
-      $connection = $this -> connect();
-      return $connection -> query($query);
+      return $this -> connect() -> query($query);
     }
 
     /*
      *  This function returns a query call as an array for easy data access
-     *  NOT SAFE
+     *  This doesn't escape the query
      */
     public function select($query){
       $rows = array();
@@ -39,15 +36,10 @@
       if($result === false){
         return false;
       }
-      while ($row = $result -> fetch_assoc()){
+      while ($row = $result -> pg_fetch_assoc()){
         $rows[] = $row;
       }
       return $rows;
-    }
-
-    public function error(){
-      $connection = $this -> connect();
-      return $connection -> error;
     }
 
     /*
@@ -55,7 +47,7 @@
      */
     public function quote($value){
       $connection = $this -> connect();
-      return "'" . $connection -> real_escape_string($value) . "'";
+      return pg_escape_literal($value);
     }
 
   }

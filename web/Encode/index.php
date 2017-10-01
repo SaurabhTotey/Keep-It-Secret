@@ -39,7 +39,7 @@
               if($privateKey !== false && !empty($privateKey)){
                 $privateKey = $privateKey[0]["privateKey"];
                 //The specified row's "lastUsed" column is then updated with a more recent time
-                $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]));
+                $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["recipientPublic"]) . ";");
                 //Attempts to encrypt message
                 $encrypted = encodeMessage($_POST["messageToEncode"], $privateKey);
                 echo "toReturn = makeSafe(" . json_encode($encrypted) . ");";

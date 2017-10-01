@@ -1,0 +1,6 @@
+{
+  "name": "Keep It Secret",
+  "description": "A website to encrypt and decrypt messages by password.",
+  "repository": "https://github.com/SaurabhTotey/Keep-It-Secret.git",
+  "addons": []
+}

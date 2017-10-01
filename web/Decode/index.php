@@ -40,7 +40,7 @@
                 $hashedPassword = $hashedPassword[0]["privateKey"];
                 if(password_verify($_POST["privateKey"], $hashedPassword)){
                   //Updates the "lastUsed" column of the database if the password and address were used and matched
-                  $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["publicKey"]));
+                  $updatedTime = $database -> query("UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = " . $database -> quote($_POST["publicKey"]) . ";");
                   //Attempts to decrypt the message
                   $decrypted = "";
                   $decrypted = decodeMessage($_POST["messageToDecode"], $hashedPassword);
