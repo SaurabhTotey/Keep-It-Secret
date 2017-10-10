@@ -19,7 +19,6 @@
       $(document).ready(function(){
 
         <?php
-          error_reporting(0);
           require_once("../../scripts/Database.php");
 
           //Constructs a database object
