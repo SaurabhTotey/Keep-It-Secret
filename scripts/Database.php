@@ -12,7 +12,6 @@
      */
     public function connect(){
       if(!isset(self::$connection)){
-        $config = parse_ini_file('config.ini');
         self::$connection = new pg_connect(getenv('DATABASE_URL'));
       }
       return self::$connection;
