@@ -12,7 +12,7 @@
      */
     public function connect(){
       if(!isset(self::$connection)){
-        self::$connection = new pg_connect(getenv('DATABASE_URL'));
+        self::$connection = pg_connect(getenv('DATABASE_URL'));
       }
       return self::$connection;
     }
@@ -22,7 +22,7 @@
      *  Queries the database with the given query string, but doesn't sanitize the inputs
      */
     public function query($query){
-      return $this -> connect() -> query($query);
+      return pg_query($this -> connect(), $query);
     }
 
     /*
