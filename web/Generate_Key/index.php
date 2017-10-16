@@ -29,8 +29,7 @@
           if(!empty($_POST["publicKey"]) && !empty($_POST["privateKey"]) && !empty($_POST["confirmPrivate"])){
             //Attempts to insert user's keys into the database if the keys match
             if(strcmp($_POST["privateKey"], $_POST["confirmPrivate"]) == 0){
-              $forceExpire = isset($_POST["forcedExpiration"])? 1 : 0;
-              $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote(password_hash($_POST["privateKey"], PASSWORD_BCRYPT)) . "," . $forceExpire . ");");
+              $result = $database -> query("INSERT INTO userKeys (publicKey, privateKey, forceExpire) VALUES (" . $database -> quote($_POST["publicKey"]) . ", " . $database -> quote(password_hash($_POST["privateKey"], PASSWORD_BCRYPT)) . "," . (isset($_POST["forcedExpiration"])? "TRUE" : "FALSE") . ");");
             }else{
               $result = false;
             }
