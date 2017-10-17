@@ -26,7 +26,7 @@
     }
 
     /*
-     *  This function returns a query call as an array for easy data access
+     *  This function returns a query call as an array of associative arrays for easy data access
      *  This doesn't escape the query
      */
     public function select($query){
@@ -35,10 +35,7 @@
       if($result === false){
         return false;
       }
-      while ($row = $result -> pg_fetch_assoc()){
-        $rows[] = $row;
-      }
-      return $rows;
+      return pg_fetch_all($result);
     }
 
     /*
