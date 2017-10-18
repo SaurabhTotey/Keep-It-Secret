@@ -86,7 +86,7 @@
     for($i = 2; strcmp((string) substr($temp, 0, 1), ";") !== 0; $i++){
       $temp = substr($message, -$i);
       if($i == strlen($message)){
-        throw new Exception("Sorry, the message must have been copied incorrectly... :(", 1);
+        throw new Exception('Sorry, the message must have been copied incorrectly... :(', 1);
       }
     }
     $messageLength = intval(substr($temp, 1)) - mt_rand(-150, 150);
