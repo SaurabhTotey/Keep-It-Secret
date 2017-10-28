@@ -37,7 +37,7 @@
               $hashedPassword = $database -> select('SELECT privateKey FROM userKeys WHERE publicKey = ' . $database -> quote($_POST['publicKey']) . ';');
               if($hashedPassword !== false && !empty($hashedPassword)){
                 $hashedPassword = $hashedPassword[0]['privateKey'];
-                if(password_verify($_POST['privateKey'], $hashedPassword)){
+                if(password_verify($_POST['privateKey'], substr($hashedPassword, 0, 60))){
                   //Updates the 'lastUsed' column of the database if the password and address were used and matched
                   $updatedTime = $database -> query('UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = ' . $database -> quote($_POST['publicKey']) . ';');
                   //Attempts to decrypt the message

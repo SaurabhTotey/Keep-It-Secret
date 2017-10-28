@@ -30,12 +30,7 @@
      *  This doesn't escape the query
      */
     public function select($query){
-      $rows = array();
-      $result = $this -> query($query);
-      if($result === false){
-        return false;
-      }
-      return pg_fetch_all($result);
+      return pg_fetch_all($this -> query($query));
     }
 
     /*
