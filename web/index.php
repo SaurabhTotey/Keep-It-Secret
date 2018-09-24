@@ -35,36 +35,9 @@
         </ul>
       </div>
 
-      <div class = 'jumbotron jumbotron-fluid img-rounded fit'>
-        <div class = 'container'>
-          <div id = 'headCarousel' class='carousel slide' data-ride='carousel'>
-            <ol class = 'carousel-indicators'>
-              <li data-target='#myCarousel' data-slide-to='0' class='active'></li>
-              <li data-target='#myCarousel' data-slide-to='1'></li>
-              <li data-target='#myCarousel' data-slide-to='2'></li>
-              <li data-target='#myCarousel' data-slide-to='3'></li>
-            </ol>
-            <div class='carousel-inner' role='listbox'>
-              <div class = 'item active'>
-
-              </div>
-              <div class = 'item'>
-
-              </div>
-              <div class = 'item'>
-
-              </div>
-              <div class = 'item'>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class = 'container fit'>
         <div class = 'row vertical-align'>
-          <div class = 'col-sm-8 specialBlue img-rounded'>
+          <div class = 'col-sm-12 specialBlue img-rounded'>
             <h3>About</h3>
             <p>Have you ever sent a private message to someone, only for the message to get intercepted or looked upon by a different person? With KeepItSecret, you won't need to have that problem anymore. With this service, you can create an public key (address) and a private key (password), or write messages intended for specific public keys (addresses). Once a message is written for an address, the message gets encoded. Whenever anyone recieves an encoded message, they can try to decode it, but the only way to actually decipher the original message is to use the intended recipient's public key (address) and private key (password).</p>
             <h3>How It Works - <a href = 'Generate_Key' class = 'linkGlyph'>Key Creation</a></h3>
@@ -73,9 +46,6 @@
             <p>Through encryption, a message goes through two main phases to make it unreadable. The first step taken is that the recipient's private key (password) is found out from the database using their public key (address). The user's private key (password) is then used as the random number generator's (RNG's) seed. This is a necessary step due to how <a href = 'https://en.wikipedia.org/wiki/Pseudorandom_number_generator' target = '_blank'>pseudo-random number generation</a> works: the same seed will always generate the same 'random' numbers (this is used later for decoding the message). Then, the message gets <a href = 'https://en.wikipedia.org/wiki/Caesar_cipher' target = '_blank'>Caeser Ciphered</a> with each letter's shift amount being a random number. Then, each letter of the message gets shuffled. Afterwards, random letters are inserted in the message. Lastly, an altered version of the original message's length is concatenated at the end of the message to be used for decrypting it.</p>
             <h3>How It Works - <a href = 'Decode' class = 'linkGlyph'>Decoding</a></h3>
             <p>To decrypt a message, the user must enter their private key (password). If their private key (password) was the private key (password) of the public key (address) used to encrypt the message, the message will decrypt correctly. Otherwise, decryption will either error or return something random. In decryption, the computer finds the message's length, and then seeds the random number generator (RNG) with the entered private key. The computer then generates and saves the same random numbers that it generated for encryption. It then takes the message through a backwards version of the encryption process to instead of getting from a message to an encoded message, will go from an encoded message to the original message. This is possible because the random number generator (RNG) was seeded same way in both encryption and decryption, so the same 'random' numbers were generated both times. These numbers can be used both ways for consistent encryption and decryption. This works due to a process known as <a href = 'https://en.wikipedia.org/wiki/Pseudorandom_number_generator' target = '_blank'>pseudo-random number generation</a>.</p>
-          </div>
-          <div class = 'col-sm-4 imgContainer'>
-
           </div>
         </div>
       </div>
