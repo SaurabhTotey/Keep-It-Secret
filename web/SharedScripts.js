@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
   //This part of codes correctly spaces the page such that the navbar is below is the banner image and that the footerbox is at the bottom of the page
-  document.getElementsByClassName('siteNav')[0].style.marginTop = document.getElementById('bannerImg').height + 'px';
   $('.nav li').width($('ul.nav').width() / 4 - 3.7);
   var windowHeight = window.innerHeight ? window.innerHeight : $(window).height()
   while($('.main').height() < windowHeight){
