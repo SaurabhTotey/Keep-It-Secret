@@ -9,11 +9,13 @@
     /*
      *  This function connects to the database
      *  if the database had already been connected to, another connection isn't made
+     *  Also ensures that every time a connection is attempted, old records are deleted
      */
     public function connect(){
       if(!isset(self::$connection)){
         self::$connection = pg_connect(getenv('DATABASE_URL'));
       }
+      pg_query(self::$connection, 'DELETE FROM userKeys WHERE lastUsed < now() - interval \'7 days\' OR (forceExpire AND lastUsed < now() - interval \'1 days\');');
       return self::$connection;
     }
 
