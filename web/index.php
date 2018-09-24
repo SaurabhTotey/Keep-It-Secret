@@ -21,17 +21,17 @@
     <div class = 'main'>
 
       <div class = 'masthead'>
-        <a href = 'index.php'><img src='Masthead.png' class = 'fit rounded-img' id = 'bannerImg'/></a>
+        <a href = 'https://keep-it-secret.herokuapp.com/'><img src='Masthead.png' class = 'fit rounded-img' id = 'bannerImg'/></a>
       </div>
 
       <br/>
 
       <div class = 'navbar fit navbar-light siteNav img-rounded'>
         <ul class = 'nav navbar-nav fit img-rounded specialBlue'>
-          <li class = 'active'><a href = 'index.php' class = 'linkGlyph'>Home</a></li>
-          <li><a href = 'Generate_Key' class = 'linkGlyph'>Generate a Key</a></li>
-          <li><a href = 'Encode' class = 'linkGlyph'>Encode a Message</a></li>
-          <li><a href = 'Decode' class = 'linkGlyph'>Decode a Message</a></li>
+          <li class = 'active'><a href = 'https://keep-it-secret.herokuapp.com/' class = 'linkGlyph'>Home</a></li>
+          <li><a href = 'https://keep-it-secret.herokuapp.com/Generate_Key/' class = 'linkGlyph'>Generate a Key</a></li>
+          <li><a href = 'https://keep-it-secret.herokuapp.com/Encode' class = 'linkGlyph'>Encode a Message</a></li>
+          <li><a href = 'https://keep-it-secret.herokuapp.com/Decode' class = 'linkGlyph'>Decode a Message</a></li>
         </ul>
       </div>
 
