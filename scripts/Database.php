@@ -15,7 +15,7 @@
       if(!isset(self::$connection)){
         self::$connection = pg_connect(getenv('DATABASE_URL'));
       }
-      pg_query(self::$connection, 'DELETE FROM userKeys WHERE lastUsed < now() - interval \'7 days\' OR (forceExpire AND lastUsed < now() - interval \'1 days\');');
+      pg_query(self::$connection, 'DELETE FROM userKeys WHERE lastUsed < now() - interval \'7 days\' OR (forceExpire AND creationTime < now() - interval \'1 days\');');
       return self::$connection;
     }
 
