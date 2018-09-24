@@ -166,9 +166,9 @@
             </a>
           </div>
           <div class = 'col-sm-4'>
-            <a role = 'button' href = 'www.SaurabhTotey.com' class = 'btn btn-block footBtn' target = '_blank'>
+            <a role = 'button' href = 'http://www.SaurabhTotey.com' class = 'btn btn-block footBtn' target = '_blank'>
               <h5>Creator Portfolio</h5>
-              <p>saurabhtotey.github.io</p>
+              <p>www.SaurabhTotey.com</p>
             </a>
           </div>
         </div>
