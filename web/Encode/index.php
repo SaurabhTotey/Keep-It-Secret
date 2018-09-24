@@ -36,7 +36,7 @@
             try{
               $privateKey = $database -> select('SELECT privateKey FROM userKeys WHERE publicKey = ' . $database -> quote($_POST['recipientPublic']) . ';');
               if($privateKey !== false && !empty($privateKey)){
-                $privateKey = $privateKey[0]['privateKey'];
+                $privateKey = $privateKey[0]['privatekey'];
                 //The specified row's 'lastUsed' column is then updated with a more recent time
                 $updatedTime = $database -> query('UPDATE userKeys SET lastUsed = NOW() WHERE publicKey = ' . $database -> quote($_POST['recipientPublic']) . ';');
                 //Attempts to encrypt message
