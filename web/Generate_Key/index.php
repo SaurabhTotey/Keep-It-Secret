@@ -35,9 +35,9 @@
             }
             //Sends out a notification saying whether the key insertion had been successful
             if($result){
-              echo 'console.log(\'Successfully inserted keys into database\'); document.getElementById(\'keyAlert\').className = \'alert alert-success\'; document.getElementById(\'keyAlert\').innerHTML = \'Your keys have been generated!\';';
+              echo 'document.getElementById(\'keyAlert\').className = \'alert alert-success\'; document.getElementById(\'keyAlert\').innerHTML = \'Your keys have been generated!\';';
             }else{
-              echo 'console.log(\'Could not insert keys into database\'); document.getElementById(\'keyAlert\').className = \'alert alert-danger\'; document.getElementById(\'keyAlert\').innerHTML = \'Address was already taken or private keys don\'t match. Try checking your connection, changing your public key, and checking your private keys.\';';
+              echo 'document.getElementById(\'keyAlert\').className = \'alert alert-danger\'; document.getElementById(\'keyAlert\').innerHTML = \'Address was already taken or private keys don\\\'t match. Try checking your connection, changing your public key, and checking your private keys.\';';
             }
 
             //Clears entered information so that future reloads don't try and re-insert keys and send an error notification

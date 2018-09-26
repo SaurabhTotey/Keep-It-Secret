@@ -82,6 +82,9 @@
     mt_srand(stringToNumber($private_key));
     $decoded = "";
     //This part unconcatenates the message from the message length and the ";" that joined them at the end
+    if(strlen($message) <= 1){
+      throw new Exception('Sorry, the message must have been copied incorrectly... :(', 1);
+    }
     $temp = "  ";
     for($i = 2; strcmp((string) substr($temp, 0, 1), ";") !== 0; $i++){
       $temp = substr($message, -$i);

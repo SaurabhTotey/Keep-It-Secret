@@ -17,10 +17,7 @@ $(document).ready(function(){
       window.getSelection().addRange(range);
       try{
         document.execCommand('copy');
-        console.log('Copy was successfully attempted');
-      }catch(e){
-        console.log('Copy was unsuccessfully attempted');
-      }
+      }catch(e){}
       window.getSelection().removeAllRanges();
     });
   }

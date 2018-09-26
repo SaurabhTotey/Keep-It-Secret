@@ -62,12 +62,10 @@
             document.getElementById('status').innerHTML = 'There was an error processing your request; try checking your public key';
             document.getElementById('encrypted').innerHTML = toReturn;
             document.getElementById('input').innerHTML = originalMessage;
-            console.log('Could not find public key');
           }else{
             //Displays the encoded message
             document.getElementById('status').innerHTML = 'Your message has been encoded successfully';
             document.getElementById('encrypted').innerHTML = toReturn;
-            console.log('Successfully found public/private key pair and encoded message');
           }
           $('#myModal').modal('show');
         }

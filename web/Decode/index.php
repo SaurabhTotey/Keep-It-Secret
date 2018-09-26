@@ -67,12 +67,10 @@
              document.getElementById('status').innerHTML = 'Invalid address, password, or message';
              document.getElementById('decrypted').innerHTML = toReturn;
              document.getElementById('input').innerHTML = originalMessage;
-             console.log('Address and password didn\'t match');
            }else{
              //Sends decrypted message or error message
              document.getElementById('status').innerHTML = 'The message has been decoded';
              document.getElementById('decrypted').innerHTML = toReturn;
-             console.log('Successfully decoded message');
            }
            $('#myModal').modal('show');
          }
