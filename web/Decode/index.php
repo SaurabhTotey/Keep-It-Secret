@@ -43,6 +43,9 @@
                   //Attempts to decrypt the message
                   $decrypted = '';
                   $decrypted = decodeMessage($_POST['messageToDecode'], $hashedPassword);
+                  if(empty($decrypted)){
+                    throw new Exception('Unsuccessful decoding', 1);
+                  }
                   echo 'toReturn = makeSafe(' . json_encode($decrypted) . ');';
                 }else{
                   throw new Exception('Keys don\'t match', 1);
